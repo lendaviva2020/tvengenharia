@@ -145,10 +145,10 @@ function Hero() {
         alt="Fachada contemporânea de casa executada pela TV Engenharia ao entardecer"
         width={1600}
         height={1104}
-        className="absolute inset-0 size-full object-cover opacity-35"
+        className="absolute inset-0 size-full object-cover opacity-55"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-background via-background/85 to-background/60" />
-      <div className="relative mx-auto w-full max-w-6xl px-5 pt-32 pb-20">
+      <div className="relative mx-auto w-full max-w-6xl px-5 pt-36 pb-24">
         <p className="mb-6 font-display text-xs uppercase tracking-[0.4em] text-gold">
           Projetos e Soluções · Cafelândia / PR
         </p>
