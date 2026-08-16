@@ -77,11 +77,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "TV Engenharia — Projetos e Soluções em Cafelândia/PR" },
+      {
+        name: "description",
+        content:
+          "TV Engenharia: projeto arquitetônico, construção chave na mão, desmembramento e unificação de lotes em Cafelândia e região, Paraná.",
+      },
+      { name: "author", content: "TV Engenharia" },
+      { property: "og:title", content: "TV Engenharia — Projetos e Soluções" },
+      {
+        property: "og:description",
+        content: "Do projeto à entrega das chaves. Engenharia em Cafelândia e região, PR.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@Lovable" },
@@ -91,7 +98,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: appCss,
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Cormorant+Garamond:wght@600;700&family=DM+Sans:wght@400;500;700&display=swap",
+      },
     ],
   }),
   shellComponent: RootShell,
