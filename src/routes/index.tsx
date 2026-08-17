@@ -164,13 +164,13 @@ function Hero() {
             href={WA_ANGELICA}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-sm bg-gold px-7 py-4 text-center font-display text-sm uppercase tracking-[0.15em] text-primary-foreground shadow-[var(--shadow-elegant)] transition-opacity hover:opacity-90"
+            className="rounded-full bg-gold px-7 py-4 text-center font-display text-sm uppercase tracking-[0.15em] text-primary-foreground shadow-[var(--shadow-elegant)] transition-opacity hover:opacity-90"
           >
             Fale conosco e solicite um orçamento
           </a>
           <a
             href="#servicos"
-            className="rounded-sm border border-gold/60 px-7 py-4 text-center font-display text-sm uppercase tracking-[0.15em] text-gold transition-colors hover:bg-gold/10"
+            className="rounded-full border border-gold/60 px-7 py-4 text-center font-display text-sm uppercase tracking-[0.15em] text-gold transition-colors hover:bg-gold/10"
           >
             Conheça os serviços
           </a>
@@ -195,7 +195,7 @@ function Sobre() {
       </p>
       <div className="mt-14 grid gap-8 md:grid-cols-3">
         {diferenciais.map(({ icon: Icon, text }) => (
-          <div key={text} className="border border-border bg-card p-8">
+          <div key={text} className="rounded-3xl border border-border bg-card p-8 shadow-[var(--shadow-soft)]">
             <GoldIcon>
               <Icon className="size-6" strokeWidth={1.4} />
             </GoldIcon>
@@ -203,7 +203,7 @@ function Sobre() {
           </div>
         ))}
       </div>
-      <div className="mt-14 grid gap-6 border border-gold/30 bg-card p-8 md:grid-cols-2 md:p-10">
+      <div className="mt-14 grid gap-6 rounded-3xl border border-gold/30 bg-card p-8 shadow-[var(--shadow-soft)] md:grid-cols-2 md:p-10">
         <div>
           <h3 className="font-display text-xl uppercase tracking-wide">Tiago Visnieski</h3>
           <p className="mt-1 text-sm text-gold">Engenheiro · CREA-PR 125668/D</p>
@@ -294,7 +294,7 @@ function Lotes() {
       <SectionTitle kicker="Regularização" title="Soluções para o seu terreno" />
       <div className="grid gap-8 md:grid-cols-2">
         {blocos.map((b) => (
-          <div key={b.title} className="border border-border bg-card p-8 md:p-10">
+          <div key={b.title} className="rounded-3xl border border-border bg-card p-8 shadow-[var(--shadow-soft)] md:p-10">
             <h3 className="font-display text-2xl uppercase tracking-wide">{b.title}</h3>
             <p className="mt-4 text-muted-foreground">{b.desc}</p>
             <ul className="mt-7 space-y-3">
@@ -353,7 +353,7 @@ function OutrosEPortfolio() {
           {outros.map(({ icon: Icon, text }) => (
             <div
               key={text}
-              className="flex items-center gap-4 border border-border bg-card p-6"
+              className="flex items-center gap-4 rounded-2xl border border-border bg-card p-6 shadow-[var(--shadow-soft)]"
             >
               <Icon className="size-6 shrink-0 text-gold" strokeWidth={1.4} />
               <p className="font-display text-sm uppercase tracking-[0.12em]">{text}</p>
@@ -367,7 +367,7 @@ function OutrosEPortfolio() {
             {projetos.map((p) => (
               <div
                 key={p}
-                className="group relative flex aspect-4/3 items-end bg-card p-6 transition-colors hover:bg-muted"
+                className="group relative flex aspect-4/3 items-end overflow-hidden rounded-xl bg-card p-6 shadow-[var(--shadow-soft)] transition-colors hover:bg-muted"
               >
                 <div className="absolute inset-0 bg-background/0 transition-colors group-hover:bg-background/60" />
                 <p className="relative font-display text-sm uppercase tracking-[0.15em] text-gold opacity-0 transition-opacity group-hover:opacity-100">
