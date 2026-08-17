@@ -404,16 +404,17 @@ function Contato() {
             href={WA_ANGELICA}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-8 inline-block w-full rounded-sm bg-gold px-8 py-5 text-center font-display text-sm uppercase tracking-[0.15em] text-primary-foreground transition-opacity hover:opacity-90"
+            className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-gold px-8 py-5 text-center font-display text-sm uppercase tracking-[0.15em] text-primary-foreground shadow-[var(--shadow-soft)] transition-opacity hover:opacity-90"
           >
+            <MessageCircle className="size-5" strokeWidth={1.6} />
             Fale conosco e solicite um orçamento
           </a>
-          <div className="mt-6 grid gap-4 sm:grid-cols-2">
+          <div className="mt-6 grid gap-4 sm:grid-cols-3">
             <a
               href={WA_TIAGO}
               target="_blank"
               rel="noopener noreferrer"
-              className="border border-gold/40 p-5 transition-colors hover:bg-gold/10"
+              className="rounded-2xl border border-gold/40 p-5 transition-colors hover:bg-gold/10"
             >
               <p className="font-display text-sm uppercase tracking-wide">Tiago Visnieski</p>
               <p className="mt-1 text-sm text-gold">(45) 99921-3004</p>
@@ -422,14 +423,24 @@ function Contato() {
               href={WA_ANGELICA}
               target="_blank"
               rel="noopener noreferrer"
-              className="border border-gold/40 p-5 transition-colors hover:bg-gold/10"
+              className="rounded-2xl border border-gold/40 p-5 transition-colors hover:bg-gold/10"
             >
               <p className="font-display text-sm uppercase tracking-wide">Angélica Bloinski</p>
               <p className="mt-1 text-sm text-gold">(45) 99817-6765</p>
             </a>
+            <a
+              href="mailto:angelicabloinski@hotmail.com"
+              className="rounded-2xl border border-gold/40 p-5 transition-colors hover:bg-gold/10"
+            >
+              <p className="font-display text-sm uppercase tracking-wide">E-mail</p>
+              <p className="mt-1 flex items-center gap-1.5 text-sm text-gold">
+                <Mail className="size-4" strokeWidth={1.6} />
+                angelicabloinski@hotmail.com
+              </p>
+            </a>
           </div>
         </div>
-        <form onSubmit={onSubmit} className="space-y-4 border border-border bg-card p-8">
+        <form onSubmit={onSubmit} className="space-y-4 rounded-3xl border border-border bg-card p-8 shadow-[var(--shadow-soft)]">
           <div>
             <label htmlFor="nome" className="font-display text-xs uppercase tracking-[0.2em] text-gold">
               Nome
@@ -439,7 +450,7 @@ function Contato() {
               required
               value={form.nome}
               onChange={(e) => setForm({ ...form, nome: e.target.value })}
-              className="mt-2 w-full rounded-sm border border-border bg-background px-4 py-3 outline-none focus:border-gold"
+              className="mt-2 w-full rounded-lg border border-border bg-background px-4 py-3 outline-none focus:border-gold"
             />
           </div>
           <div>
@@ -454,7 +465,7 @@ function Contato() {
               required
               value={form.telefone}
               onChange={(e) => setForm({ ...form, telefone: e.target.value })}
-              className="mt-2 w-full rounded-sm border border-border bg-background px-4 py-3 outline-none focus:border-gold"
+              className="mt-2 w-full rounded-lg border border-border bg-background px-4 py-3 outline-none focus:border-gold"
             />
           </div>
           <div>
@@ -470,12 +481,12 @@ function Contato() {
               required
               value={form.mensagem}
               onChange={(e) => setForm({ ...form, mensagem: e.target.value })}
-              className="mt-2 w-full rounded-sm border border-border bg-background px-4 py-3 outline-none focus:border-gold"
+              className="mt-2 w-full rounded-lg border border-border bg-background px-4 py-3 outline-none focus:border-gold"
             />
           </div>
           <button
             type="submit"
-            className="w-full rounded-sm bg-gold px-6 py-4 font-display text-sm uppercase tracking-[0.15em] text-primary-foreground transition-opacity hover:opacity-90"
+            className="w-full rounded-full bg-gold px-6 py-4 font-display text-sm uppercase tracking-[0.15em] text-primary-foreground shadow-[var(--shadow-soft)] transition-opacity hover:opacity-90"
           >
             Enviar pelo WhatsApp
           </button>
@@ -511,10 +522,10 @@ function Footer() {
             <AtSign className="size-5" strokeWidth={1.5} />
           </a>
           <a
-            href="https://www.facebook.com/search/top?q=Tiago%20Visnieski%20Engenharia"
+            href="https://www.facebook.com/share/1DijWGi1sU/"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Facebook Tiago Visnieski Engenharia"
+            aria-label="Facebook TV Engenharia"
           >
             <Facebook className="size-5" strokeWidth={1.5} />
           </a>
