@@ -27,8 +27,15 @@ import {
 } from "lucide-react";
 import heroCasa from "@/assets/hero-casa.jpg";
 
-const WA_ANGELICA = "https://wa.me/5545998176765";
-const WA_TIAGO = "https://wa.me/5545999213004";
+const WA_ANGELICA_BASE = "5545998176765";
+const WA_TIAGO_BASE = "5545999213004";
+const WA_PRE_MESSAGE = "Quero falar sobre um projeto";
+const WA_DEFAULT_CONTEXT = "Cafelândia/PR";
+
+function whatsappLink(base: string, text: string, context?: string) {
+  const fullText = context ? `${text}\n\n${context}` : text;
+  return `https://wa.me/${base}?text=${encodeURIComponent(fullText)}`;
+}
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -126,7 +133,7 @@ function Header() {
           </a>
         </nav>
         <a
-          href={WA_ANGELICA}
+          href={whatsappLink(WA_ANGELICA_BASE, WA_PRE_MESSAGE, WA_DEFAULT_CONTEXT)}
           target="_blank"
           rel="noopener noreferrer"
           className="rounded-full bg-gold px-5 py-2.5 font-display text-xs uppercase tracking-[0.18em] text-primary-foreground shadow-[var(--shadow-soft)] transition-opacity hover:opacity-90"
@@ -161,7 +168,7 @@ function Hero() {
         </p>
         <div className="mt-10 flex flex-col gap-4 sm:flex-row">
           <a
-            href={WA_ANGELICA}
+            href={whatsappLink(WA_ANGELICA_BASE, WA_PRE_MESSAGE, WA_DEFAULT_CONTEXT)}
             target="_blank"
             rel="noopener noreferrer"
             className="rounded-full bg-gold px-7 py-4 text-center font-display text-sm uppercase tracking-[0.15em] text-primary-foreground shadow-[var(--shadow-elegant)] transition-opacity hover:opacity-90"
@@ -383,12 +390,32 @@ function OutrosEPortfolio() {
 }
 
 function Contato() {
-  const [form, setForm] = useState({ nome: "", telefone: "", mensagem: "" });
+  const [form, setForm] = useState({ nome: "", telefone: "", bairroCidade: "", mensagem: "" });
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
-    const texto = `Olá! Meu nome é ${form.nome}. Telefone: ${form.telefone}. ${form.mensagem}`;
-    window.open(`${WA_ANGELICA}?text=${encodeURIComponent(texto)}`, "_blank", "noopener");
+
+    const nextErrors: Record<string, string> = {};
+    if (!form.nome.trim() || form.nome.length > 100) nextErrors.nome = "Informe seu nome.";
+    if (!form.telefone.trim() || form.telefone.length > 40) {
+      nextErrors.telefone = "Informe um telefone válido.";
+    }
+    if (!form.bairroCidade.trim() || form.bairroCidade.length > 120) {
+      nextErrors.bairroCidade = "Informe o bairro e a cidade.";
+    }
+    if (!form.mensagem.trim() || form.mensagem.length > 1000) {
+      nextErrors.mensagem = "Escreva sua mensagem (até 1000 caracteres).";
+    }
+
+    if (Object.keys(nextErrors).length > 0) {
+      setErrors(nextErrors);
+      return;
+    }
+    setErrors({});
+
+    const texto = `${WA_PRE_MESSAGE}\n\nBairro/Cidade: ${form.bairroCidade}\n\nOlá! Meu nome é ${form.nome}. Telefone: ${form.telefone}. ${form.mensagem}`;
+    window.open(whatsappLink(WA_ANGELICA_BASE, texto), "_blank", "noopener");
   };
 
   return (
@@ -401,7 +428,7 @@ function Contato() {
             Cafelândia e região, no Paraná.
           </p>
           <a
-            href={WA_ANGELICA}
+            href={whatsappLink(WA_ANGELICA_BASE, WA_PRE_MESSAGE, WA_DEFAULT_CONTEXT)}
             target="_blank"
             rel="noopener noreferrer"
             className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-gold px-8 py-5 text-center font-display text-sm uppercase tracking-[0.15em] text-primary-foreground shadow-[var(--shadow-soft)] transition-opacity hover:opacity-90"
@@ -411,7 +438,7 @@ function Contato() {
           </a>
           <div className="mt-6 grid gap-4 sm:grid-cols-3">
             <a
-              href={WA_TIAGO}
+              href={whatsappLink(WA_TIAGO_BASE, WA_PRE_MESSAGE, WA_DEFAULT_CONTEXT)}
               target="_blank"
               rel="noopener noreferrer"
               className="rounded-2xl border border-gold/40 p-5 transition-colors hover:bg-gold/10"
@@ -420,7 +447,7 @@ function Contato() {
               <p className="mt-1 text-sm text-gold">(45) 99921-3004</p>
             </a>
             <a
-              href={WA_ANGELICA}
+              href={whatsappLink(WA_ANGELICA_BASE, WA_PRE_MESSAGE, WA_DEFAULT_CONTEXT)}
               target="_blank"
               rel="noopener noreferrer"
               className="rounded-2xl border border-gold/40 p-5 transition-colors hover:bg-gold/10"
@@ -450,8 +477,10 @@ function Contato() {
               required
               value={form.nome}
               onChange={(e) => setForm({ ...form, nome: e.target.value })}
+              maxLength={100}
               className="mt-2 w-full rounded-lg border border-border bg-background px-4 py-3 outline-none focus:border-gold"
             />
+            {errors.nome ? <p className="mt-1 text-xs text-destructive">{errors.nome}</p> : null}
           </div>
           <div>
             <label
@@ -465,8 +494,24 @@ function Contato() {
               required
               value={form.telefone}
               onChange={(e) => setForm({ ...form, telefone: e.target.value })}
+              maxLength={40}
               className="mt-2 w-full rounded-lg border border-border bg-background px-4 py-3 outline-none focus:border-gold"
             />
+            {errors.telefone ? <p className="mt-1 text-xs text-destructive">{errors.telefone}</p> : null}
+          </div>
+          <div>
+            <label htmlFor="bairroCidade" className="font-display text-xs uppercase tracking-[0.2em] text-gold">
+              Bairro / Cidade
+            </label>
+            <input
+              id="bairroCidade"
+              required
+              value={form.bairroCidade}
+              onChange={(e) => setForm({ ...form, bairroCidade: e.target.value })}
+              maxLength={120}
+              className="mt-2 w-full rounded-lg border border-border bg-background px-4 py-3 outline-none focus:border-gold"
+            />
+            {errors.bairroCidade ? <p className="mt-1 text-xs text-destructive">{errors.bairroCidade}</p> : null}
           </div>
           <div>
             <label
@@ -481,8 +526,10 @@ function Contato() {
               required
               value={form.mensagem}
               onChange={(e) => setForm({ ...form, mensagem: e.target.value })}
+              maxLength={1000}
               className="mt-2 w-full rounded-lg border border-border bg-background px-4 py-3 outline-none focus:border-gold"
             />
+            {errors.mensagem ? <p className="mt-1 text-xs text-destructive">{errors.mensagem}</p> : null}
           </div>
           <button
             type="submit"
@@ -573,7 +620,7 @@ function Index() {
       </main>
       <Footer />
       <a
-        href={WA_ANGELICA}
+        href={whatsappLink(WA_ANGELICA_BASE, WA_PRE_MESSAGE, WA_DEFAULT_CONTEXT)}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Fale conosco no WhatsApp"
