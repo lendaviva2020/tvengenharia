@@ -23,6 +23,7 @@ import {
   Facebook,
   AtSign,
   MessageCircle,
+  Mail,
 } from "lucide-react";
 import heroCasa from "@/assets/hero-casa.jpg";
 
@@ -128,7 +129,7 @@ function Header() {
           href={WA_ANGELICA}
           target="_blank"
           rel="noopener noreferrer"
-          className="rounded-sm bg-gold px-4 py-2.5 font-display text-xs uppercase tracking-[0.18em] text-primary-foreground transition-opacity hover:opacity-90"
+          className="rounded-full bg-gold px-5 py-2.5 font-display text-xs uppercase tracking-[0.18em] text-primary-foreground shadow-[var(--shadow-soft)] transition-opacity hover:opacity-90"
         >
           Fale no WhatsApp
         </a>
@@ -163,13 +164,13 @@ function Hero() {
             href={WA_ANGELICA}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-sm bg-gold px-7 py-4 text-center font-display text-sm uppercase tracking-[0.15em] text-primary-foreground shadow-[var(--shadow-elegant)] transition-opacity hover:opacity-90"
+            className="rounded-full bg-gold px-7 py-4 text-center font-display text-sm uppercase tracking-[0.15em] text-primary-foreground shadow-[var(--shadow-elegant)] transition-opacity hover:opacity-90"
           >
             Fale conosco e solicite um orçamento
           </a>
           <a
             href="#servicos"
-            className="rounded-sm border border-gold/60 px-7 py-4 text-center font-display text-sm uppercase tracking-[0.15em] text-gold transition-colors hover:bg-gold/10"
+            className="rounded-full border border-gold/60 px-7 py-4 text-center font-display text-sm uppercase tracking-[0.15em] text-gold transition-colors hover:bg-gold/10"
           >
             Conheça os serviços
           </a>
@@ -194,7 +195,7 @@ function Sobre() {
       </p>
       <div className="mt-14 grid gap-8 md:grid-cols-3">
         {diferenciais.map(({ icon: Icon, text }) => (
-          <div key={text} className="border border-border bg-card p-8">
+          <div key={text} className="rounded-3xl border border-border bg-card p-8 shadow-[var(--shadow-soft)]">
             <GoldIcon>
               <Icon className="size-6" strokeWidth={1.4} />
             </GoldIcon>
@@ -202,7 +203,7 @@ function Sobre() {
           </div>
         ))}
       </div>
-      <div className="mt-14 grid gap-6 border border-gold/30 bg-card p-8 md:grid-cols-2 md:p-10">
+      <div className="mt-14 grid gap-6 rounded-3xl border border-gold/30 bg-card p-8 shadow-[var(--shadow-soft)] md:grid-cols-2 md:p-10">
         <div>
           <h3 className="font-display text-xl uppercase tracking-wide">Tiago Visnieski</h3>
           <p className="mt-1 text-sm text-gold">Engenheiro · CREA-PR 125668/D</p>
@@ -293,7 +294,7 @@ function Lotes() {
       <SectionTitle kicker="Regularização" title="Soluções para o seu terreno" />
       <div className="grid gap-8 md:grid-cols-2">
         {blocos.map((b) => (
-          <div key={b.title} className="border border-border bg-card p-8 md:p-10">
+          <div key={b.title} className="rounded-3xl border border-border bg-card p-8 shadow-[var(--shadow-soft)] md:p-10">
             <h3 className="font-display text-2xl uppercase tracking-wide">{b.title}</h3>
             <p className="mt-4 text-muted-foreground">{b.desc}</p>
             <ul className="mt-7 space-y-3">
@@ -352,7 +353,7 @@ function OutrosEPortfolio() {
           {outros.map(({ icon: Icon, text }) => (
             <div
               key={text}
-              className="flex items-center gap-4 border border-border bg-card p-6"
+              className="flex items-center gap-4 rounded-2xl border border-border bg-card p-6 shadow-[var(--shadow-soft)]"
             >
               <Icon className="size-6 shrink-0 text-gold" strokeWidth={1.4} />
               <p className="font-display text-sm uppercase tracking-[0.12em]">{text}</p>
@@ -366,7 +367,7 @@ function OutrosEPortfolio() {
             {projetos.map((p) => (
               <div
                 key={p}
-                className="group relative flex aspect-4/3 items-end bg-card p-6 transition-colors hover:bg-muted"
+                className="group relative flex aspect-4/3 items-end overflow-hidden rounded-xl bg-card p-6 shadow-[var(--shadow-soft)] transition-colors hover:bg-muted"
               >
                 <div className="absolute inset-0 bg-background/0 transition-colors group-hover:bg-background/60" />
                 <p className="relative font-display text-sm uppercase tracking-[0.15em] text-gold opacity-0 transition-opacity group-hover:opacity-100">
@@ -403,16 +404,17 @@ function Contato() {
             href={WA_ANGELICA}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-8 inline-block w-full rounded-sm bg-gold px-8 py-5 text-center font-display text-sm uppercase tracking-[0.15em] text-primary-foreground transition-opacity hover:opacity-90"
+            className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-gold px-8 py-5 text-center font-display text-sm uppercase tracking-[0.15em] text-primary-foreground shadow-[var(--shadow-soft)] transition-opacity hover:opacity-90"
           >
+            <MessageCircle className="size-5" strokeWidth={1.6} />
             Fale conosco e solicite um orçamento
           </a>
-          <div className="mt-6 grid gap-4 sm:grid-cols-2">
+          <div className="mt-6 grid gap-4 sm:grid-cols-3">
             <a
               href={WA_TIAGO}
               target="_blank"
               rel="noopener noreferrer"
-              className="border border-gold/40 p-5 transition-colors hover:bg-gold/10"
+              className="rounded-2xl border border-gold/40 p-5 transition-colors hover:bg-gold/10"
             >
               <p className="font-display text-sm uppercase tracking-wide">Tiago Visnieski</p>
               <p className="mt-1 text-sm text-gold">(45) 99921-3004</p>
@@ -421,14 +423,24 @@ function Contato() {
               href={WA_ANGELICA}
               target="_blank"
               rel="noopener noreferrer"
-              className="border border-gold/40 p-5 transition-colors hover:bg-gold/10"
+              className="rounded-2xl border border-gold/40 p-5 transition-colors hover:bg-gold/10"
             >
               <p className="font-display text-sm uppercase tracking-wide">Angélica Bloinski</p>
               <p className="mt-1 text-sm text-gold">(45) 99817-6765</p>
             </a>
+            <a
+              href="mailto:angelicabloinski@hotmail.com"
+              className="rounded-2xl border border-gold/40 p-5 transition-colors hover:bg-gold/10"
+            >
+              <p className="font-display text-sm uppercase tracking-wide">E-mail</p>
+              <p className="mt-1 flex items-center gap-1.5 text-sm text-gold">
+                <Mail className="size-4" strokeWidth={1.6} />
+                angelicabloinski@hotmail.com
+              </p>
+            </a>
           </div>
         </div>
-        <form onSubmit={onSubmit} className="space-y-4 border border-border bg-card p-8">
+        <form onSubmit={onSubmit} className="space-y-4 rounded-3xl border border-border bg-card p-8 shadow-[var(--shadow-soft)]">
           <div>
             <label htmlFor="nome" className="font-display text-xs uppercase tracking-[0.2em] text-gold">
               Nome
@@ -438,7 +450,7 @@ function Contato() {
               required
               value={form.nome}
               onChange={(e) => setForm({ ...form, nome: e.target.value })}
-              className="mt-2 w-full rounded-sm border border-border bg-background px-4 py-3 outline-none focus:border-gold"
+              className="mt-2 w-full rounded-lg border border-border bg-background px-4 py-3 outline-none focus:border-gold"
             />
           </div>
           <div>
@@ -453,7 +465,7 @@ function Contato() {
               required
               value={form.telefone}
               onChange={(e) => setForm({ ...form, telefone: e.target.value })}
-              className="mt-2 w-full rounded-sm border border-border bg-background px-4 py-3 outline-none focus:border-gold"
+              className="mt-2 w-full rounded-lg border border-border bg-background px-4 py-3 outline-none focus:border-gold"
             />
           </div>
           <div>
@@ -469,16 +481,33 @@ function Contato() {
               required
               value={form.mensagem}
               onChange={(e) => setForm({ ...form, mensagem: e.target.value })}
-              className="mt-2 w-full rounded-sm border border-border bg-background px-4 py-3 outline-none focus:border-gold"
+              className="mt-2 w-full rounded-lg border border-border bg-background px-4 py-3 outline-none focus:border-gold"
             />
           </div>
           <button
             type="submit"
-            className="w-full rounded-sm bg-gold px-6 py-4 font-display text-sm uppercase tracking-[0.15em] text-primary-foreground transition-opacity hover:opacity-90"
+            className="w-full rounded-full bg-gold px-6 py-4 font-display text-sm uppercase tracking-[0.15em] text-primary-foreground shadow-[var(--shadow-soft)] transition-opacity hover:opacity-90"
           >
             Enviar pelo WhatsApp
           </button>
         </form>
+      </div>
+      <div className="mt-16">
+        <p className="mb-4 text-center font-display text-sm uppercase tracking-[0.2em] text-gold">
+          Atendemos Cafelândia e região
+        </p>
+        <div className="overflow-hidden rounded-3xl border border-border shadow-[var(--shadow-soft)]">
+          <iframe
+            title="Mapa de Cafelândia, PR"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d58086.0!2d-53.32!3d-22.63!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x948a7b2b9b9b9b9b%3A0x9b9b9b9b9b9b9b9b!2sCafel%C3%A2ndia%2C%20PR!5e0!3m2!1spt-BR!2sbr!4v"
+            width="100%"
+            height="360"
+            style={{ border: 0 }}
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          />
+        </div>
       </div>
     </section>
   );
@@ -510,10 +539,10 @@ function Footer() {
             <AtSign className="size-5" strokeWidth={1.5} />
           </a>
           <a
-            href="https://www.facebook.com/search/top?q=Tiago%20Visnieski%20Engenharia"
+            href="https://www.facebook.com/share/1DijWGi1sU/"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Facebook Tiago Visnieski Engenharia"
+            aria-label="Facebook TV Engenharia"
           >
             <Facebook className="size-5" strokeWidth={1.5} />
           </a>
