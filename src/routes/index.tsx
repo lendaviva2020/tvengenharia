@@ -129,7 +129,7 @@ function Header() {
           href={WA_ANGELICA}
           target="_blank"
           rel="noopener noreferrer"
-          className="rounded-sm bg-gold px-4 py-2.5 font-display text-xs uppercase tracking-[0.18em] text-primary-foreground transition-opacity hover:opacity-90"
+          className="rounded-full bg-gold px-5 py-2.5 font-display text-xs uppercase tracking-[0.18em] text-primary-foreground shadow-[var(--shadow-soft)] transition-opacity hover:opacity-90"
         >
           Fale no WhatsApp
         </a>
