@@ -23,6 +23,7 @@ import {
   Facebook,
   AtSign,
   MessageCircle,
+  Mail,
 } from "lucide-react";
 import heroCasa from "@/assets/hero-casa.jpg";
 
