@@ -391,12 +391,12 @@ function OutrosEPortfolio() {
 
 function Contato() {
   const [form, setForm] = useState({ nome: "", telefone: "", bairroCidade: "", mensagem: "" });
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [errors, setErrors] = useState<{ nome?: string; telefone?: string; bairroCidade?: string; mensagem?: string }>({});
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
 
-    const nextErrors: Record<string, string> = {};
+    const nextErrors: { nome?: string; telefone?: string; bairroCidade?: string; mensagem?: string } = {};
     if (!form.nome.trim() || form.nome.length > 100) nextErrors.nome = "Informe seu nome.";
     if (!form.telefone.trim() || form.telefone.length > 40) {
       nextErrors.telefone = "Informe um telefone válido.";
