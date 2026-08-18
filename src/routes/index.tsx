@@ -26,6 +26,12 @@ import {
   Mail,
 } from "lucide-react";
 import heroCasa from "@/assets/hero-casa.jpg";
+import projeto1 from "@/assets/projeto-1.jpg.asset.json";
+import projeto2 from "@/assets/projeto-2.jpg.asset.json";
+import projeto3 from "@/assets/projeto-3.jpg.asset.json";
+import projeto4 from "@/assets/projeto-4.jpg.asset.json";
+import projeto5 from "@/assets/projeto-5.jpg.asset.json";
+import projeto6 from "@/assets/projeto-6.jpg.asset.json";
 
 const WA_ANGELICA_BASE = "5545998176765";
 const WA_TIAGO_BASE = "5545999213004";
@@ -339,14 +345,68 @@ const outros = [
   { icon: Search, text: "Vistoria de Obra" },
 ];
 
-const projetos = [
-  "Residência Alto Padrão",
-  "Casa Térrea Contemporânea",
-  "Sobrado Urbano",
-  "Reforma de Fachada",
-  "Desmembramento Residencial",
-  "Projeto Comercial",
+type Projeto = {
+  id: string;
+  titulo: string;
+  cidade: string;
+  categoria: "Residencial" | "Reforma";
+  img: string;
+  detalhes: string[];
+};
+
+const projetos: Projeto[] = [
+  {
+    id: "p1",
+    titulo: "Duas unidades geminadas",
+    cidade: "Cafelândia — PR",
+    categoria: "Residencial",
+    img: projeto1.url,
+    detalhes: ["2 unidades de 69,99 m²", "Lote 6x25 m cada", 'Loteamento "Jardim Ravena II"'],
+  },
+  {
+    id: "p2",
+    titulo: "Residência Parque do Café",
+    cidade: "Cafelândia — PR",
+    categoria: "Residencial",
+    img: projeto2.url,
+    detalhes: ["Obra de 69,99 m²", "Lote 10x20 m", 'Loteamento "Parque do Café"'],
+  },
+  {
+    id: "p3",
+    titulo: "Residência Ouro Verde",
+    cidade: "Cafelândia — PR",
+    categoria: "Residencial",
+    img: projeto3.url,
+    detalhes: ["Lote 8x20 m", 'Loteamento "Ouro Verde"'],
+  },
+  {
+    id: "p4",
+    titulo: "Residência Ravena II",
+    cidade: "Cafelândia — PR",
+    categoria: "Residencial",
+    img: projeto4.url,
+    detalhes: ["Obra de 50 m²", "Lote 6x24 m", 'Loteamento "Ravena II"'],
+  },
+  {
+    id: "p5",
+    titulo: "Revitalização de fachada e ampliação",
+    cidade: "Anahy — PR",
+    categoria: "Reforma",
+    img: projeto5.url,
+    detalhes: ["Obra de revitalização de fachada e ampliação", "Anahy — PR"],
+  },
+  {
+    id: "p6",
+    titulo: "Residência Ravena",
+    cidade: "Cafelândia — PR",
+    categoria: "Residencial",
+    img: projeto6.url,
+    detalhes: ["Obra de 57,0 m²", "Lote 7x20 m", 'Loteamento "Ravena"'],
+  },
 ];
+
+const CREDITO = "Projeto: Angélica Bloinski · Execução: Tiago Visnieski";
+const categorias = ["Todos", "Residencial", "Reforma"] as const;
 
 function OutrosEPortfolio() {
   return (
@@ -368,24 +428,113 @@ function OutrosEPortfolio() {
           ))}
         </div>
 
-        <div className="mt-24">
-          <SectionTitle kicker="Projetos executados" title="Portfólio" />
-          <div className="grid gap-4 md:grid-cols-3">
-            {projetos.map((p) => (
-              <div
-                key={p}
-                className="group relative flex aspect-4/3 items-end overflow-hidden rounded-xl bg-card p-6 shadow-[var(--shadow-soft)] transition-colors hover:bg-muted"
-              >
-                <div className="absolute inset-0 bg-background/0 transition-colors group-hover:bg-background/60" />
-                <p className="relative font-display text-sm uppercase tracking-[0.15em] text-gold opacity-0 transition-opacity group-hover:opacity-100">
-                  {p}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
+        <Portfolio />
       </div>
     </section>
+  );
+}
+
+function Portfolio() {
+  const [filtro, setFiltro] = useState<(typeof categorias)[number]>("Todos");
+  const [aberto, setAberto] = useState<Projeto | null>(null);
+  const lista = projetos.filter((p) => filtro === "Todos" || p.categoria === filtro);
+
+  useEffect(() => {
+    if (!aberto) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setAberto(null);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [aberto]);
+
+  return (
+    <div className="mt-24">
+      <SectionTitle kicker="Projetos executados" title="Projetos Concluídos" />
+
+      <div className="mb-8 flex flex-wrap gap-3">
+        {categorias.map((c) => (
+          <button
+            key={c}
+            type="button"
+            onClick={() => setFiltro(c)}
+            className={`rounded-full border px-5 py-2 font-display text-xs uppercase tracking-[0.15em] transition-colors ${
+              filtro === c
+                ? "border-gold bg-gold text-primary-foreground"
+                : "border-border bg-card text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            {c}
+          </button>
+        ))}
+      </div>
+
+      <div className="grid gap-6 md:grid-cols-3">
+        {lista.map((p) => (
+          <button
+            key={p.id}
+            type="button"
+            onClick={() => setAberto(p)}
+            className="group overflow-hidden rounded-2xl border border-border bg-card text-left shadow-[var(--shadow-soft)] transition-transform hover:-translate-y-1"
+          >
+            <img
+              src={p.img}
+              alt={`${p.titulo} — ${p.cidade}`}
+              loading="lazy"
+              className="aspect-4/3 w-full object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+            <div className="p-5">
+              <p className="font-display text-sm uppercase tracking-[0.14em]">{p.titulo}</p>
+              <p className="mt-1 text-sm text-muted-foreground">{p.cidade}</p>
+              <span className="mt-3 inline-block rounded-full border border-gold/40 px-3 py-1 text-[11px] uppercase tracking-[0.14em] text-gold">
+                {p.categoria}
+              </span>
+            </div>
+          </button>
+        ))}
+      </div>
+
+      {aberto && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-background/90 p-4 backdrop-blur"
+          onClick={() => setAberto(null)}
+          role="dialog"
+          aria-modal="true"
+          aria-label={aberto.titulo}
+        >
+          <div
+            className="max-h-[90vh] w-full max-w-3xl overflow-y-auto rounded-3xl border border-border bg-card shadow-[var(--shadow-elegant)]"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img src={aberto.img} alt={aberto.titulo} className="w-full rounded-t-3xl object-cover" />
+            <div className="p-6 md:p-8">
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <h3 className="font-display text-xl uppercase tracking-[0.12em]">{aberto.titulo}</h3>
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    {aberto.cidade} · {aberto.categoria}
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setAberto(null)}
+                  className="rounded-full border border-border px-4 py-2 text-xs uppercase tracking-[0.14em] text-muted-foreground hover:text-foreground"
+                >
+                  Fechar
+                </button>
+              </div>
+              <ul className="mt-5 space-y-2 text-sm text-muted-foreground">
+                {aberto.detalhes.map((d) => (
+                  <li key={d} className="flex gap-3">
+                    <Check className="mt-0.5 size-4 shrink-0 text-gold" strokeWidth={1.6} />
+                    {d}
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-6 border-t border-border pt-4 font-serif text-sm text-gold">{CREDITO}</p>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
   );
 }
 
