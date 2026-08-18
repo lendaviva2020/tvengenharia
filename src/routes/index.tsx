@@ -37,6 +37,11 @@ const WA_ANGELICA_BASE = "5545998176765";
 const WA_TIAGO_BASE = "5545999213004";
 const WA_PRE_MESSAGE = "Quero falar sobre um projeto";
 const WA_DEFAULT_CONTEXT = "Cafelândia/PR";
+const SITE_URL = "https://tvengenharia.lovable.app";
+
+function abs(url: string) {
+  return url.startsWith("http") ? url : `${SITE_URL}${url}`;
+}
 
 function whatsappLink(base: string, text: string, context?: string) {
   const fullText = context ? `${text}\n\n${context}` : text;
@@ -60,22 +65,64 @@ export const Route = createFileRoute("/")({
           "Do projeto à entrega das chaves: engenharia completa em Cafelândia e região, PR. CREA-PR.",
       },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/" },
+      { property: "og:url", content: `${SITE_URL}/` },
+      { property: "og:image", content: abs(projeto3.url) },
+      { name: "twitter:image", content: abs(projeto3.url) },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "/" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/` }],
     scripts: [
       {
         type: "application/ld+json",
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "ProfessionalService",
+          "@id": `${SITE_URL}/#organizacao`,
+          url: `${SITE_URL}/`,
           name: "TV Engenharia — Tiago Visnieski Engenharia",
           description:
             "Projetos arquitetônicos, construção chave na mão, desmembramento e unificação de lotes.",
           areaServed: "Cafelândia e região, Paraná",
           telephone: "+5545998176765",
+          email: "angelicabloinski@hotmail.com",
+          image: abs(projeto3.url),
           address: { "@type": "PostalAddress", addressRegion: "PR", addressCountry: "BR" },
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          name: "Projetos concluídos — TV Engenharia",
+          numberOfItems: projetos.length,
+          itemListElement: projetos.map((p, i) => ({
+            "@type": "ListItem",
+            position: i + 1,
+            item: {
+              "@type": "CreativeWork",
+              "@id": `${SITE_URL}/#projeto-${p.id}`,
+              name: p.titulo,
+              genre: p.categoria,
+              description: `${p.detalhes.join(" · ")} — ${p.cidade}.`,
+              image: abs(p.img),
+              locationCreated: {
+                "@type": "Place",
+                name: p.cidade,
+                address: {
+                  "@type": "PostalAddress",
+                  addressLocality: p.cidade.split(" — ")[0],
+                  addressRegion: "PR",
+                  addressCountry: "BR",
+                },
+              },
+              creator: [
+                { "@type": "Person", name: "Angélica Bloinski", jobTitle: "Projeto" },
+                { "@type": "Person", name: "Tiago Visnieski", jobTitle: "Execução" },
+              ],
+              provider: { "@id": `${SITE_URL}/#organizacao` },
+            },
+          })),
         }),
       },
     ],
