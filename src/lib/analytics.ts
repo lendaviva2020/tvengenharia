@@ -5,7 +5,7 @@ const GA_MEASUREMENT_ID = "G-PLACEHOLDER";
 declare global {
   interface Window {
     dataLayer: unknown[];
-    gtag: (...args: unknown[]) => void;
+    gtag?: (...args: unknown[]) => void;
   }
 }
 
