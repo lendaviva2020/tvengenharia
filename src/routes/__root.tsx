@@ -84,14 +84,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "TV Engenharia: projeto arquitetônico, construção chave na mão, desmembramento e unificação de lotes em Cafelândia e região, Paraná.",
       },
       { name: "author", content: "TV Engenharia" },
-      { property: "og:title", content: "TV Engenharia — Projetos e Soluções" },
+      { property: "og:title", content: "TV Engenharia — Projetos e Soluções em Cafelândia/PR" },
       {
         property: "og:description",
         content: "Do projeto à entrega das chaves. Engenharia em Cafelândia e região, PR.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {
@@ -115,7 +114,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="pt-BR">
       <head>
         <HeadContent />
       </head>
