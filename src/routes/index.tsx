@@ -52,13 +52,13 @@ export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "TV Engenharia — Projetos e Construção em Cafelândia/PR" },
+      { title: "TV Engenharia — Projetos e Soluções em Cafelândia/PR" },
       {
         name: "description",
         content:
           "Projeto chave na mão, projetos arquitetônicos, desmembramento e unificação de lotes, financiamento e reformas em Cafelândia e região, Paraná.",
       },
-      { property: "og:title", content: "TV Engenharia — Projetos e Soluções" },
+      { property: "og:title", content: "TV Engenharia — Projetos e Soluções em Cafelândia/PR" },
       {
         property: "og:description",
         content:
@@ -742,7 +742,7 @@ function Contato() {
         <div className="overflow-hidden rounded-3xl border border-border shadow-[var(--shadow-soft)]">
           <iframe
             title="Mapa de Cafelândia, PR"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d58086.0!2d-53.32!3d-22.63!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x948a7b2b9b9b9b9b%3A0x9b9b9b9b9b9b9b9b!2sCafel%C3%A2ndia%2C%20PR!5e0!3m2!1spt-BR!2sbr!4v"
+            src="https://maps.google.com/maps?q=Cafel%C3%A2ndia%2C%20Paran%C3%A1&t=&z=14&ie=UTF8&iwloc=&output=embed"
             width="100%"
             height="360"
             style={{ border: 0 }}
