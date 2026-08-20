@@ -225,6 +225,7 @@ function Hero() {
             href={whatsappLink(WA_ANGELICA_BASE, WA_PRE_MESSAGE, WA_DEFAULT_CONTEXT)}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackEvent("hero_cta_click", { text: "Fale conosco e solicite um orçamento" })}
             className="rounded-full bg-gold px-7 py-4 text-center font-display text-sm uppercase tracking-[0.15em] text-primary-foreground shadow-[var(--shadow-elegant)] transition-opacity hover:opacity-90"
           >
             Fale conosco e solicite um orçamento
@@ -268,10 +269,26 @@ function Sobre() {
         <div>
           <h3 className="font-display text-xl uppercase tracking-wide">Tiago Visnieski</h3>
           <p className="mt-1 text-sm text-gold">Engenheiro · CREA-PR 125668/D</p>
+          <a
+            href="https://www.crea-pr.org.br/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-2 inline-block text-xs text-muted-foreground underline transition-colors hover:text-gold"
+          >
+            Consultar registro no CREA-PR
+          </a>
         </div>
         <div>
           <h3 className="font-display text-xl uppercase tracking-wide">Angélica Bloinski</h3>
           <p className="mt-1 text-sm text-gold">Engenheira Civil · CREA-PR 207026/D</p>
+          <a
+            href="https://www.crea-pr.org.br/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-2 inline-block text-xs text-muted-foreground underline transition-colors hover:text-gold"
+          >
+            Consultar registro no CREA-PR
+          </a>
         </div>
         <p className="text-muted-foreground md:col-span-2">
           Todos os projetos são acompanhados pessoalmente pela dupla técnica responsável, do
@@ -611,6 +628,8 @@ function Contato() {
     }
     setErrors({});
 
+    trackEvent("contact_form_submit", { nome: form.nome, bairroCidade: form.bairroCidade });
+
     const texto = `${WA_PRE_MESSAGE}\n\nBairro/Cidade: ${form.bairroCidade}\n\nOlá! Meu nome é ${form.nome}. Telefone: ${form.telefone}. ${form.mensagem}`;
     window.open(whatsappLink(WA_ANGELICA_BASE, texto), "_blank", "noopener");
   };
@@ -638,6 +657,7 @@ function Contato() {
               href={whatsappLink(WA_TIAGO_BASE, WA_PRE_MESSAGE, WA_DEFAULT_CONTEXT)}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackEvent("whatsapp_tiago_click", { profissional: "Tiago Visnieski" })}
               className="rounded-2xl border border-gold/40 p-5 transition-colors hover:bg-gold/10"
             >
               <p className="font-display text-sm uppercase tracking-wide">Tiago Visnieski</p>
@@ -647,6 +667,7 @@ function Contato() {
               href={whatsappLink(WA_ANGELICA_BASE, WA_PRE_MESSAGE, WA_DEFAULT_CONTEXT)}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackEvent("whatsapp_angelica_click", { profissional: "Angélica Bloinski" })}
               className="rounded-2xl border border-gold/40 p-5 transition-colors hover:bg-gold/10"
             >
               <p className="font-display text-sm uppercase tracking-wide">Angélica Bloinski</p>
@@ -821,6 +842,7 @@ function Index() {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Fale conosco no WhatsApp"
+        onClick={() => trackEvent("whatsapp_floating_click")}
         className="fixed bottom-6 right-6 z-50 inline-flex size-14 items-center justify-center rounded-full bg-gold text-primary-foreground shadow-[var(--shadow-elegant)] transition-transform hover:scale-105"
       >
         <MessageCircle className="size-7" strokeWidth={1.6} />
