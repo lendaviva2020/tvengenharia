@@ -32,6 +32,7 @@ import projeto3 from "@/assets/projeto-3.jpg.asset.json";
 import projeto4 from "@/assets/projeto-4.jpg.asset.json";
 import projeto5 from "@/assets/projeto-5.jpg.asset.json";
 import projeto6 from "@/assets/projeto-6.jpg.asset.json";
+import { trackEvent } from "@/lib/analytics";
 
 const WA_ANGELICA_BASE = "5545998176765";
 const WA_TIAGO_BASE = "5545999213004";
