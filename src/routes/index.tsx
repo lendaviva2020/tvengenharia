@@ -203,11 +203,13 @@ function Hero() {
   return (
     <section id="top" className="diagonal-gold relative flex min-h-screen items-center">
       <img
-        src={heroCasa}
-        alt="Fachada contemporânea de casa executada pela TV Engenharia ao entardecer"
+        src={projeto1}
+        alt="Residência geminada Jardim Ravena II — projeto e execução TV Engenharia"
         width={1600}
         height={1104}
-        className="absolute inset-0 size-full object-cover opacity-55"
+        fetchPriority="high"
+        loading="eager"
+        className="hero-zoom absolute inset-0 size-full object-cover opacity-55"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-background via-background/85 to-background/60" />
       <div className="relative mx-auto w-full max-w-6xl px-5 pt-36 pb-24">
