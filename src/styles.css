@@ -173,6 +173,20 @@
   clip-path: polygon(0 0, 100% 0, calc(100% - 28px) 100%, 28px 100%);
 }
 
+@keyframes hero-zoom {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.06);
+  }
+}
+
+@utility hero-zoom {
+  animation: hero-zoom 20s linear infinite;
+}
+
 @layer base {
   * {
     border-color: var(--color-border);
