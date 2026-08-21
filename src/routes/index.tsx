@@ -628,7 +628,7 @@ function Contato() {
     }
     setErrors({});
 
-    trackEvent("contact_form_submit", { nome: form.nome, bairroCidade: form.bairroCidade });
+    trackEvent("contact_form_submit");
 
     const texto = `${WA_PRE_MESSAGE}\n\nBairro/Cidade: ${form.bairroCidade}\n\nOlá! Meu nome é ${form.nome}. Telefone: ${form.telefone}. ${form.mensagem}`;
     window.open(whatsappLink(WA_ANGELICA_BASE, texto), "_blank", "noopener");
