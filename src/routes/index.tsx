@@ -26,12 +26,12 @@ import {
   Mail,
 } from "lucide-react";
 import heroCasa from "@/assets/hero-casa.jpg";
-import projeto1 from "@/assets/projeto-1.jpg.asset.json";
-import projeto2 from "@/assets/projeto-2.jpg.asset.json";
-import projeto3 from "@/assets/projeto-3.jpg.asset.json";
-import projeto4 from "@/assets/projeto-4.jpg.asset.json";
-import projeto5 from "@/assets/projeto-5.jpg.asset.json";
-import projeto6 from "@/assets/projeto-6.jpg.asset.json";
+import projeto1 from "@/assets/projeto-1.jpg";
+import projeto2 from "@/assets/projeto-2.jpg";
+import projeto3 from "@/assets/projeto-3.jpg";
+import projeto4 from "@/assets/projeto-4.jpg";
+import projeto5 from "@/assets/projeto-5.jpg";
+import projeto6 from "@/assets/projeto-6.jpg";
 import { trackEvent } from "@/lib/analytics";
 
 const WA_ANGELICA_BASE = "5545998176765";
@@ -67,8 +67,8 @@ export const Route = createFileRoute("/")({
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: `${SITE_URL}/` },
-      { property: "og:image", content: abs(projeto3.url) },
-      { name: "twitter:image", content: abs(projeto3.url) },
+      { property: "og:image", content: abs(projeto3) },
+      { name: "twitter:image", content: abs(projeto3) },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/` }],
@@ -86,7 +86,7 @@ export const Route = createFileRoute("/")({
           areaServed: "Cafelândia e região, Paraná",
           telephone: "+5545998176765",
           email: "angelicabloinski@hotmail.com",
-          image: abs(projeto3.url),
+          image: abs(projeto3),
           address: { "@type": "PostalAddress", addressRegion: "PR", addressCountry: "BR" },
         }),
       },
@@ -425,7 +425,7 @@ const projetos: Projeto[] = [
     titulo: "Duas unidades geminadas",
     cidade: "Cafelândia — PR",
     categoria: "Residencial",
-    img: projeto1.url,
+    img: projeto1,
     detalhes: ["2 unidades de 69,99 m²", "Lote 6x25 m cada", 'Loteamento "Jardim Ravena II"'],
   },
   {
@@ -433,7 +433,7 @@ const projetos: Projeto[] = [
     titulo: "Residência Parque do Café",
     cidade: "Cafelândia — PR",
     categoria: "Residencial",
-    img: projeto2.url,
+    img: projeto2,
     detalhes: ["Obra de 69,99 m²", "Lote 10x20 m", 'Loteamento "Parque do Café"'],
   },
   {
@@ -441,7 +441,7 @@ const projetos: Projeto[] = [
     titulo: "Residência Ouro Verde",
     cidade: "Cafelândia — PR",
     categoria: "Residencial",
-    img: projeto3.url,
+    img: projeto3,
     detalhes: ["Lote 8x20 m", 'Loteamento "Ouro Verde"'],
   },
   {
@@ -449,7 +449,7 @@ const projetos: Projeto[] = [
     titulo: "Residência Ravena II",
     cidade: "Cafelândia — PR",
     categoria: "Residencial",
-    img: projeto4.url,
+    img: projeto4,
     detalhes: ["Obra de 50 m²", "Lote 6x24 m", 'Loteamento "Ravena II"'],
   },
   {
@@ -457,7 +457,7 @@ const projetos: Projeto[] = [
     titulo: "Revitalização de fachada e ampliação",
     cidade: "Anahy — PR",
     categoria: "Reforma",
-    img: projeto5.url,
+    img: projeto5,
     detalhes: ["Obra de revitalização de fachada e ampliação", "Anahy — PR"],
   },
   {
@@ -465,7 +465,7 @@ const projetos: Projeto[] = [
     titulo: "Residência Ravena",
     cidade: "Cafelândia — PR",
     categoria: "Residencial",
-    img: projeto6.url,
+    img: projeto6,
     detalhes: ["Obra de 57,0 m²", "Lote 7x20 m", 'Loteamento "Ravena"'],
   },
 ];
