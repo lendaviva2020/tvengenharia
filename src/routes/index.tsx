@@ -36,9 +36,9 @@ import { trackEvent } from "@/lib/analytics";
 
 const WA_ANGELICA_BASE = "5545998176765";
 const WA_TIAGO_BASE = "5545999213004";
-const WA_PRE_MESSAGE = "Quero falar sobre um projeto";
+const WA_PRE_MESSAGE = "Quero falar sobre um projeto — vim pelo site";
 const WA_DEFAULT_CONTEXT = "Cafelândia/PR";
-const SITE_URL = "https://tvengenharia.lovable.app";
+const SITE_URL = "https://tvengenharia.vercel.app";
 
 function abs(url: string) {
   return url.startsWith("http") ? url : `${SITE_URL}${url}`;
