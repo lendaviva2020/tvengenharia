@@ -270,7 +270,7 @@ function Sobre() {
           <h3 className="font-display text-xl uppercase tracking-wide">Tiago Visnieski</h3>
           <p className="mt-1 text-sm text-gold">Engenheiro · CREA-PR 125668/D</p>
           <a
-            href="https://www.crea-pr.org.br/"
+            href="https://servicos.crea-pr.org.br/publico/profissional"
             target="_blank"
             rel="noopener noreferrer"
             className="mt-2 inline-block text-xs text-muted-foreground underline transition-colors hover:text-gold"
@@ -282,7 +282,7 @@ function Sobre() {
           <h3 className="font-display text-xl uppercase tracking-wide">Angélica Bloinski</h3>
           <p className="mt-1 text-sm text-gold">Engenheira Civil · CREA-PR 207026/D</p>
           <a
-            href="https://www.crea-pr.org.br/"
+            href="https://servicos.crea-pr.org.br/publico/profissional"
             target="_blank"
             rel="noopener noreferrer"
             className="mt-2 inline-block text-xs text-muted-foreground underline transition-colors hover:text-gold"
