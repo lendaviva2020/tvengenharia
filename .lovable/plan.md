@@ -1,47 +1,58 @@
-# Análise do site TV Engenharia — melhorias propostas
+# Melhorias técnicas: SEO, performance e acessibilidade
 
-Revisei a landing page, a página de privacidade, as rotas de robots/sitemap, os metadados e os arquivos de estilo. O site está bem estruturado; abaixo estão os pontos que valem correção, agrupados por prioridade.
+Nove ajustes pontuais, sem mudar conteúdo nem comportamento do site.
 
-## 1. Correções técnicas (alta prioridade)
+## 1. Sitemap
 
-- **Sitemap incompleto**: `/privacidade` existe mas não está listado. Adicionar a segunda URL na rota `/sitemap.xml`.
-- **Sitemap duplicado**: existem dois sitemaps (`public/sitemap.xml` estático e a rota dinâmica). O arquivo estático pode ser servido em vez da rota e ficar desatualizado. Remover o estático e manter só a rota; mesma lógica para `public/robots.txt` vs. a rota `/robots.txt`.
-- **Domínio inconsistente**: o código usa `https://tvengenharia.vercel.app` em canonical/og:url/JSON-LD, mas o site também está publicado em `tvengenharia.lovable.app`. Definir um domínio canônico único (decisão sua) e usá-lo em todos os lugares.
-- **Google Analytics inativo**: `G-PLACEHOLDER` em `src/lib/analytics.ts`. Substituir pelo ID real (você me passa) para começar a medir.
-- **Título duplicado**: `__root.tsx` e `index.tsx` definem o mesmo título/descrição. Manter os específicos nas rotas e deixar o root só com fallback.
+Adicionar `/privacidade` na rota `src/routes/sitemap[.]xml.ts` e no arquivo estático `public/sitemap.xml`, mantendo a home e os dois arquivos.
 
-## 2. SEO local e dados estruturados
+## 2. Dados estruturados (ProfessionalService)
 
-- Enriquecer o `ProfessionalService` com `address` (Cafelândia/PR), `telephone`, `email`, `areaServed`, `openingHours` e `sameAs` (Instagram e Facebook) — hoje faltam campos que o Google usa para negócios locais.
-- Adicionar `FAQPage` com 5–6 perguntas reais (quanto custa um projeto, prazo de aprovação, como funciona o chave na mão, o que é desmembramento etc.). Gera rich results e responde dúvidas comuns.
-- Adicionar `BreadcrumbList` na página de privacidade.
-- Incluir `og:image` também no `/privacidade` e garantir `og:image:width/height`.
+No JSON-LD da home, incluir:
+- `address` — PostalAddress: Cafelândia, PR, BR
+- `telephone` — os dois números (+5545999213004 Tiago, +5545998176765 Angélica)
+- `email` — angelicabloinski@hotmail.com
+- `areaServed` — "Cafelândia e região, Paraná"
+- `sameAs` — links do Instagram e Facebook usados no rodapé
 
-## 3. Performance
+## 3. Imagens
 
-- As fotos do portfólio e do hero são JPGs grandes servidos em tamanho único. Gerar versões responsivas (`srcset`/`sizes`) e usar `width`/`height` explícitos para evitar layout shift (CLS).
-- Adicionar `<link rel="preload">` para a imagem do hero.
-- O iframe do Google Maps carrega scripts de terceiros no primeiro paint: aplicar `loading="lazy"` (se ainda não tiver) ou carregar sob clique com uma imagem estática de fallback.
+- Hero já tem `width`/`height`; acrescentar `sizes="100vw"`.
+- Cards do portfólio e imagem do lightbox: adicionar `width`/`height` explícitos e `sizes` correspondentes ao espaço real (coluna do grid no card, largura do diálogo no lightbox).
+- Gerar variantes responsivas via query de importação do Vite (`?w=...&format=webp`) para montar `srcset` nas fotos do portfólio e no hero.
 
-## 4. Acessibilidade
+## 4. Mapa sob clique
 
-- O lightbox do portfólio precisa de foco preso (focus trap), foco inicial no diálogo, fechamento com `Esc` e retorno de foco ao card de origem.
-- Adicionar link "pular para o conteúdo" no topo.
-- Verificar contraste do dourado sobre grafite em textos pequenos (kickers com `tracking` largo) e garantir estados de foco visíveis em todos os botões/links.
-- Associar mensagens de erro do formulário aos campos com `aria-describedby` e `aria-invalid`.
+Substituir o `<iframe>` do Google Maps por um placeholder leve (imagem estática/painel em gradiente com o nome da cidade) e um botão "Carregar mapa". O iframe só é montado após o clique. O texto "Atendemos Cafelândia e região" permanece acima.
 
-## 5. Conteúdo e conversão
+## 5. Acessibilidade do lightbox
 
-- Seção de depoimentos/prova social (mesmo que 3 curtos) — hoje não existe.
-- Bloco de FAQ visível na página (alinhado ao schema acima).
-- CTA fixo no rodapé mobile com WhatsApp + telefone.
-- Página dedicada por serviço (ex.: `/chave-na-mao`, `/desmembramento`) para capturar buscas específicas — hoje tudo está em uma única página, o que limita o alcance orgânico.
-- Exibir número de telefone clicável (`tel:`) além do WhatsApp.
+- Foco inicial no diálogo ao abrir
+- Foco preso (Tab/Shift+Tab circulam dentro do diálogo)
+- Fechar com `Esc`
+- Devolver o foco ao card que abriu o modal
+- Bloquear scroll do body enquanto aberto
+
+## 6. Acessibilidade geral
+
+- Link "Pular para o conteúdo" no topo, visível só no foco de teclado, apontando para o `<main>`/`#conteudo`.
+- Estado de foco visível padronizado (`focus-visible:outline` dourado) em botões, links e campos.
+- Formulário: `aria-invalid` nos campos com erro e `aria-describedby` ligando cada mensagem de erro ao seu campo (ids únicos), com `role="alert"` na mensagem.
+
+## 7. Contraste
+
+Medir o dourado atual (`oklch(0.73 0.115 89)`) sobre o grafite (`oklch(0.18 0.012 258)`). Se algum texto pequeno (kickers com `tracking` largo, legendas de 11–12px) ficar abaixo de 4.5:1, clarear levemente o token usado nesses textos (novo token `--gold-text`) mantendo o dourado atual nos elementos gráficos, para não alterar a identidade visual.
+
+## 8. Telefones clicáveis
+
+Na seção de Contato, exibir `(45) 99921-3004` e `(45) 99817-6765` também como links `tel:` clicáveis, ao lado dos botões de WhatsApp, com evento de analytics próprio (`phone_click`).
+
+## 9. og:image em /privacidade
+
+Adicionar `og:image` (mesma imagem absoluta usada na home), `og:image:width` e `og:image:height` no `head()` de `src/routes/privacidade.tsx`.
 
 ## Detalhes técnicos
 
-Arquivos envolvidos: `src/routes/index.tsx` (metadados, JSON-LD, portfólio, formulário, mapa), `src/routes/privacidade.tsx`, `src/routes/sitemap[.]xml.ts`, `src/routes/robots[.]txt.ts`, `public/sitemap.xml` e `public/robots.txt` (remoção), `src/lib/analytics.ts`, `src/routes/__root.tsx`.
+Arquivos: `src/routes/index.tsx`, `src/routes/privacidade.tsx`, `src/routes/sitemap[.]xml.ts`, `public/sitemap.xml`, `src/styles.css`.
 
-## Sugestão de execução
-
-Posso implementar em ondas: (1) correções técnicas + SEO local, (2) acessibilidade + performance, (3) conteúdo novo (FAQ, depoimentos, páginas por serviço). Me diga por onde começar — e, se possível, o ID real do GA4 e qual domínio é o canônico.
+Observação: o mapa sob clique remove um iframe de terceiros do carregamento inicial — ganho direto de LCP/TBT no mobile.
