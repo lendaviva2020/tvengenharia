@@ -818,9 +818,17 @@ function Footer() {
           Tiago Visnieski — CREA-PR 125668/D · Angélica Bloinski — CREA-PR 207026/D · Cafelândia e
           região, Paraná
         </p>
-        <p className="text-xs text-muted-foreground">
-          © {new Date().getFullYear()} TV Engenharia — Projetos e Soluções
-        </p>
+        <div className="flex flex-col items-center gap-2 sm:flex-row sm:gap-4">
+          <p className="text-xs text-muted-foreground">
+            © {new Date().getFullYear()} TV Engenharia — Projetos e Soluções
+          </p>
+          <Link
+            to="/privacidade"
+            className="text-xs text-muted-foreground underline transition-colors hover:text-gold"
+          >
+            Política de Privacidade
+          </Link>
+        </div>
       </div>
     </footer>
   );
