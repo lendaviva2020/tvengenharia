@@ -227,7 +227,9 @@ function Hero() {
             href={whatsappLink(WA_ANGELICA_BASE, WA_PRE_MESSAGE, WA_DEFAULT_CONTEXT)}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={() => trackEvent("hero_cta_click", { text: "Fale conosco e solicite um orçamento" })}
+            onClick={() =>
+              trackEvent("hero_cta_click", { text: "Fale conosco e solicite um orçamento" })
+            }
             className="rounded-full bg-gold px-7 py-4 text-center font-display text-sm uppercase tracking-[0.15em] text-primary-foreground shadow-[var(--shadow-elegant)] transition-opacity hover:opacity-90"
           >
             Fale conosco e solicite um orçamento
@@ -259,7 +261,10 @@ function Sobre() {
       </p>
       <div className="mt-14 grid gap-8 md:grid-cols-3">
         {diferenciais.map(({ icon: Icon, text }) => (
-          <div key={text} className="rounded-3xl border border-border bg-card p-8 shadow-[var(--shadow-soft)]">
+          <div
+            key={text}
+            className="rounded-3xl border border-border bg-card p-8 shadow-[var(--shadow-soft)]"
+          >
             <GoldIcon>
               <Icon className="size-6" strokeWidth={1.4} />
             </GoldIcon>
@@ -374,7 +379,10 @@ function Lotes() {
       <SectionTitle kicker="Regularização" title="Soluções para o seu terreno" />
       <div className="grid gap-8 md:grid-cols-2">
         {blocos.map((b) => (
-          <div key={b.title} className="rounded-3xl border border-border bg-card p-8 shadow-[var(--shadow-soft)] md:p-10">
+          <div
+            key={b.title}
+            className="rounded-3xl border border-border bg-card p-8 shadow-[var(--shadow-soft)] md:p-10"
+          >
             <h3 className="font-display text-2xl uppercase tracking-wide">{b.title}</h3>
             <p className="mt-4 text-muted-foreground">{b.desc}</p>
             <ul className="mt-7 space-y-3">
@@ -477,10 +485,7 @@ const categorias = ["Todos", "Residencial", "Reforma"] as const;
 
 function OutrosEPortfolio() {
   return (
-    <section
-      id="portfolio"
-      className="border-y border-border bg-secondary/40 py-24 md:py-32"
-    >
+    <section id="portfolio" className="border-y border-border bg-secondary/40 py-24 md:py-32">
       <div className="mx-auto max-w-6xl px-5">
         <SectionTitle kicker="Complementares" title="Outros serviços" />
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -571,11 +576,17 @@ function Portfolio() {
             className="max-h-[90vh] w-full max-w-3xl overflow-y-auto rounded-3xl border border-border bg-card shadow-[var(--shadow-elegant)]"
             onClick={(e) => e.stopPropagation()}
           >
-            <img src={aberto.img} alt={aberto.titulo} className="w-full rounded-t-3xl object-cover" />
+            <img
+              src={aberto.img}
+              alt={aberto.titulo}
+              className="w-full rounded-t-3xl object-cover"
+            />
             <div className="p-6 md:p-8">
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <h3 className="font-display text-xl uppercase tracking-[0.12em]">{aberto.titulo}</h3>
+                  <h3 className="font-display text-xl uppercase tracking-[0.12em]">
+                    {aberto.titulo}
+                  </h3>
                   <p className="mt-1 text-sm text-muted-foreground">
                     {aberto.cidade} · {aberto.categoria}
                   </p>
@@ -596,7 +607,9 @@ function Portfolio() {
                   </li>
                 ))}
               </ul>
-              <p className="mt-6 border-t border-border pt-4 font-serif text-sm text-gold">{CREDITO}</p>
+              <p className="mt-6 border-t border-border pt-4 font-serif text-sm text-gold">
+                {CREDITO}
+              </p>
             </div>
           </div>
         </div>
@@ -607,12 +620,22 @@ function Portfolio() {
 
 function Contato() {
   const [form, setForm] = useState({ nome: "", telefone: "", bairroCidade: "", mensagem: "" });
-  const [errors, setErrors] = useState<{ nome?: string; telefone?: string; bairroCidade?: string; mensagem?: string }>({});
+  const [errors, setErrors] = useState<{
+    nome?: string;
+    telefone?: string;
+    bairroCidade?: string;
+    mensagem?: string;
+  }>({});
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
 
-    const nextErrors: { nome?: string; telefone?: string; bairroCidade?: string; mensagem?: string } = {};
+    const nextErrors: {
+      nome?: string;
+      telefone?: string;
+      bairroCidade?: string;
+      mensagem?: string;
+    } = {};
     if (!form.nome.trim() || form.nome.length > 100) nextErrors.nome = "Informe seu nome.";
     if (!form.telefone.trim() || form.telefone.length > 40) {
       nextErrors.telefone = "Informe um telefone válido.";
@@ -659,7 +682,9 @@ function Contato() {
               href={whatsappLink(WA_TIAGO_BASE, WA_PRE_MESSAGE, WA_DEFAULT_CONTEXT)}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => trackEvent("whatsapp_tiago_click", { profissional: "Tiago Visnieski" })}
+              onClick={() =>
+                trackEvent("whatsapp_tiago_click", { profissional: "Tiago Visnieski" })
+              }
               className="rounded-2xl border border-gold/40 p-5 transition-colors hover:bg-gold/10"
             >
               <p className="font-display text-sm uppercase tracking-wide">Tiago Visnieski</p>
@@ -669,7 +694,9 @@ function Contato() {
               href={whatsappLink(WA_ANGELICA_BASE, WA_PRE_MESSAGE, WA_DEFAULT_CONTEXT)}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => trackEvent("whatsapp_angelica_click", { profissional: "Angélica Bloinski" })}
+              onClick={() =>
+                trackEvent("whatsapp_angelica_click", { profissional: "Angélica Bloinski" })
+              }
               className="rounded-2xl border border-gold/40 p-5 transition-colors hover:bg-gold/10"
             >
               <p className="font-display text-sm uppercase tracking-wide">Angélica Bloinski</p>
@@ -687,9 +714,15 @@ function Contato() {
             </a>
           </div>
         </div>
-        <form onSubmit={onSubmit} className="space-y-4 rounded-3xl border border-border bg-card p-8 shadow-[var(--shadow-soft)]">
+        <form
+          onSubmit={onSubmit}
+          className="space-y-4 rounded-3xl border border-border bg-card p-8 shadow-[var(--shadow-soft)]"
+        >
           <div>
-            <label htmlFor="nome" className="font-display text-xs uppercase tracking-[0.2em] text-gold">
+            <label
+              htmlFor="nome"
+              className="font-display text-xs uppercase tracking-[0.2em] text-gold"
+            >
               Nome
             </label>
             <input
@@ -717,10 +750,15 @@ function Contato() {
               maxLength={40}
               className="mt-2 w-full rounded-lg border border-border bg-background px-4 py-3 outline-none focus:border-gold"
             />
-            {errors.telefone ? <p className="mt-1 text-xs text-destructive">{errors.telefone}</p> : null}
+            {errors.telefone ? (
+              <p className="mt-1 text-xs text-destructive">{errors.telefone}</p>
+            ) : null}
           </div>
           <div>
-            <label htmlFor="bairroCidade" className="font-display text-xs uppercase tracking-[0.2em] text-gold">
+            <label
+              htmlFor="bairroCidade"
+              className="font-display text-xs uppercase tracking-[0.2em] text-gold"
+            >
               Bairro / Cidade
             </label>
             <input
@@ -731,7 +769,9 @@ function Contato() {
               maxLength={120}
               className="mt-2 w-full rounded-lg border border-border bg-background px-4 py-3 outline-none focus:border-gold"
             />
-            {errors.bairroCidade ? <p className="mt-1 text-xs text-destructive">{errors.bairroCidade}</p> : null}
+            {errors.bairroCidade ? (
+              <p className="mt-1 text-xs text-destructive">{errors.bairroCidade}</p>
+            ) : null}
           </div>
           <div>
             <label
@@ -749,7 +789,9 @@ function Contato() {
               maxLength={1000}
               className="mt-2 w-full rounded-lg border border-border bg-background px-4 py-3 outline-none focus:border-gold"
             />
-            {errors.mensagem ? <p className="mt-1 text-xs text-destructive">{errors.mensagem}</p> : null}
+            {errors.mensagem ? (
+              <p className="mt-1 text-xs text-destructive">{errors.mensagem}</p>
+            ) : null}
           </div>
           <button
             type="submit"
