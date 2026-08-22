@@ -13,7 +13,6 @@ export function initAnalytics() {
   if (typeof window === "undefined") return;
 
   if (GA_MEASUREMENT_ID === "G-PLACEHOLDER") {
-    // eslint-disable-next-line no-console
     console.warn(
       "[GA4] Measurement ID de placeholder em uso. Substitua G-PLACEHOLDER pelo ID real em src/lib/analytics.ts",
     );
