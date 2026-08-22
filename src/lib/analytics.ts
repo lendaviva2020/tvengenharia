@@ -13,9 +13,8 @@ export function initAnalytics() {
   if (typeof window === "undefined") return;
 
   if (GA_MEASUREMENT_ID === "G-PLACEHOLDER") {
-    // eslint-disable-next-line no-console
     console.warn(
-      "[GA4] Measurement ID de placeholder em uso. Substitua G-PLACEHOLDER pelo ID real em src/lib/analytics.ts"
+      "[GA4] Measurement ID de placeholder em uso. Substitua G-PLACEHOLDER pelo ID real em src/lib/analytics.ts",
     );
   }
 
@@ -36,10 +35,7 @@ export function initAnalytics() {
   gtag("config", GA_MEASUREMENT_ID);
 }
 
-export function trackEvent(
-  eventName: string,
-  params?: Record<string, string | number | boolean>
-) {
+export function trackEvent(eventName: string, params?: Record<string, string | number | boolean>) {
   if (typeof window === "undefined" || !window.gtag) return;
   window.gtag("event", eventName, params ?? {});
 }

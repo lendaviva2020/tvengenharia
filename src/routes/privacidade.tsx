@@ -57,9 +57,7 @@ function Privacidade() {
           <h1 className="mt-4 text-3xl uppercase leading-tight tracking-wide sm:text-4xl md:text-5xl">
             Aviso de Privacidade
           </h1>
-          <p className="mt-4 text-sm text-muted-foreground">
-            Última atualização: agosto de 2026
-          </p>
+          <p className="mt-4 text-sm text-muted-foreground">Última atualização: agosto de 2026</p>
 
           <div className="mt-10 space-y-8 text-muted-foreground">
             <p>
@@ -74,10 +72,10 @@ function Privacidade() {
               </h2>
               <ul className="space-y-4">
                 <li>
-                  <strong className="text-foreground">Formulário de contato:</strong> nome,
-                  telefone e mensagem que você preenche. Esses dados não ficam armazenados em nenhum
-                  banco de dados do site — eles são usados apenas para montar uma mensagem que é
-                  enviada diretamente para o WhatsApp da nossa equipe.
+                  <strong className="text-foreground">Formulário de contato:</strong> nome, telefone
+                  e mensagem que você preenche. Esses dados não ficam armazenados em nenhum banco de
+                  dados do site — eles são usados apenas para montar uma mensagem que é enviada
+                  diretamente para o WhatsApp da nossa equipe.
                 </li>
                 <li>
                   <strong className="text-foreground">Dados de navegação:</strong> quando o Google
@@ -104,10 +102,10 @@ function Privacidade() {
               </h2>
               <p>
                 Não vendemos nem compartilhamos seus dados com terceiros para fins comerciais. Os
-                únicos serviços envolvidos são o <strong className="text-foreground">WhatsApp</strong>{" "}
-                (para onde sua mensagem de contato é enviada) e o{" "}
-                <strong className="text-foreground">Google Analytics</strong> (ferramenta de métricas
-                de uso, quando ativa).
+                únicos serviços envolvidos são o{" "}
+                <strong className="text-foreground">WhatsApp</strong> (para onde sua mensagem de
+                contato é enviada) e o <strong className="text-foreground">Google Analytics</strong>{" "}
+                (ferramenta de métricas de uso, quando ativa).
               </p>
             </section>
 
