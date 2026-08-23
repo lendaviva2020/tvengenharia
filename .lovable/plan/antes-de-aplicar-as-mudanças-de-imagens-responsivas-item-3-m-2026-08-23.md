@@ -1,4 +1,8 @@
-# Melhorias técnicas: SEO, performance e acessibilidade
+# Antes de aplicar as mudanças de imagens responsivas (item 3), me confirme uma coisa: as variantes geradas por essa transformação (?w=...&format=webp) resultam em arquivos estáticos reais, gerados durante o build e incluídos no bundle final (como já acontece hoje com hero-casa.jpg), ou dependem de uma URL/proxy que só resolve dentro do domínio do Lovable (como o caminho /__l5e/... que já nos causou imagens quebradas na Vercel antes)?
+
+
+
+# Se for a segunda opção, não aplique dessa forma — use um mecanismo que gere arquivos estáticos de verdade no build, do mesmo jeito que a imagem do hero já funciona hoje em qualquer domínio.Melhorias técnicas: SEO, performance e acessibilidade
 
 Nove ajustes pontuais, sem mudar conteúdo nem comportamento do site.
 
@@ -9,9 +13,10 @@ Adicionar `/privacidade` na rota `src/routes/sitemap[.]xml.ts` e no arquivo est�
 ## 2. Dados estruturados (ProfessionalService)
 
 No JSON-LD da home, incluir:
+
 - `address` — PostalAddress: Cafelândia, PR, BR
 - `telephone` — os dois números (+5545999213004 Tiago, +5545998176765 Angélica)
-- `email` — angelicabloinski@hotmail.com
+- `email` — [angelicabloinski@hotmail.com](mailto:angelicabloinski@hotmail.com)
 - `areaServed` — "Cafelândia e região, Paraná"
 - `sameAs` — links do Instagram e Facebook usados no rodapé
 
