@@ -90,8 +90,14 @@ export const Route = createFileRoute("/")({
           areaServed: "Cafelândia e região, Paraná",
           telephone: "+5545998176765",
           email: "angelicabloinski@hotmail.com",
-          image: abs(projeto3),
+          logo: `${SITE_URL}/web-app-manifest-512x512.png`,
+          image: [`${SITE_URL}/web-app-manifest-512x512.png`, abs(projeto3)],
           address: { "@type": "PostalAddress", addressRegion: "PR", addressCountry: "BR" },
+          sameAs: [
+            "https://instagram.com/t.v_engenharia",
+            "https://www.threads.com/@t.v_engenharia",
+            "https://www.facebook.com/share/1DijWGi1sU/",
+          ],
         }),
       },
       {

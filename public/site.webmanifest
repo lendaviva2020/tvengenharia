@@ -1,0 +1,24 @@
+{
+  "name": "TV Engenharia",
+  "short_name": "TV Eng",
+  "description": "Projetos e soluções em engenharia em Cafelândia e região, Paraná.",
+  "start_url": "/",
+  "lang": "pt-BR",
+  "icons": [
+    {
+      "src": "/web-app-manifest-192x192.png?v=20260823",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/web-app-manifest-512x512.png?v=20260823",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "theme_color": "#0E1116",
+  "background_color": "#0E1116",
+  "display": "standalone"
+}

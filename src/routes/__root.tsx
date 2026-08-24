@@ -75,6 +75,25 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
+    links: [
+      {
+        rel: "stylesheet",
+        href: appCss,
+      },
+      { rel: "icon", href: "/favicon.ico", sizes: "48x48" },
+      { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
+      { rel: "icon", type: "image/png", sizes: "96x96", href: "/favicon-96x96.png" },
+      { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" },
+      { rel: "manifest", href: "/site.webmanifest" },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      // display=swap + media=print evita bloquear o 1º paint do H1 (fonte sobe depois)
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Cormorant+Garamond:wght@600;700&family=DM+Sans:wght@400;500;700&display=swap",
+        media: "print",
+      },
+    ],
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
@@ -85,31 +104,20 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "TV Engenharia: projeto arquitetônico, construção chave na mão, desmembramento e unificação de lotes em Cafelândia e região, Paraná.",
       },
       { name: "author", content: "TV Engenharia" },
+      { name: "theme-color", content: "#0E1116" },
+      { name: "msapplication-TileColor", content: "#0E1116" },
       { property: "og:title", content: "TV Engenharia — Projetos e Soluções em Cafelândia/PR" },
       {
         property: "og:description",
         content: "Do projeto à entrega das chaves. Engenharia em Cafelândia e região, PR.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:image", content: "https://tvengenharia.vercel.app/web-app-manifest-512x512.png" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "https://tvengenharia.vercel.app/web-app-manifest-512x512.png" },
       {
         name: "google-site-verification",
         content: "vbEnHIMLrPBYpQJDOMBqWJ4pxJirodOE36oZtWREQlc",
-      },
-    ],
-    links: [
-      {
-        rel: "stylesheet",
-        href: appCss,
-      },
-      { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      // display=swap + media=print evita bloquear o 1º paint do H1 (fonte sobe depois)
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Cormorant+Garamond:wght@600;700&family=DM+Sans:wght@400;500;700&display=swap",
-        media: "print",
       },
     ],
   }),
