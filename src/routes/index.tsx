@@ -39,6 +39,10 @@ const WA_TIAGO_BASE = "5545999213004";
 const WA_PRE_MESSAGE = "Quero falar sobre um projeto — vim pelo site";
 const WA_DEFAULT_CONTEXT = "Cafelândia/PR";
 const SITE_URL = "https://tvengenharia.vercel.app";
+const COMPANY_MAP_URL = "https://maps.app.goo.gl/7dDmeSB4Z6ajR3cV6";
+const COMPANY_MAP_EMBED_URL =
+  "https://www.google.com/maps?q=https%3A%2F%2Fmaps.app.goo.gl%2F7dDmeSB4Z6ajR3cV6&output=embed";
+const THREADS_URL = "https://www.threads.com/@t.v_engenharia";
 
 function abs(url: string) {
   return url.startsWith("http") ? url : `${SITE_URL}${url}`;
@@ -808,7 +812,7 @@ function Contato() {
         <div className="overflow-hidden rounded-3xl border border-border shadow-[var(--shadow-soft)]">
           <iframe
             title="Mapa de Cafelândia, PR"
-            src="https://maps.google.com/maps?q=Cafel%C3%A2ndia%2C%20Paran%C3%A1&t=&z=14&ie=UTF8&iwloc=&output=embed"
+            src={COMPANY_MAP_EMBED_URL}
             width="100%"
             height="360"
             style={{ border: 0 }}
@@ -816,6 +820,16 @@ function Contato() {
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
           />
+        </div>
+        <div className="mt-6 text-center">
+          <a
+            href={COMPANY_MAP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center rounded-full border border-gold/50 px-6 py-3 font-display text-xs uppercase tracking-[0.15em] text-gold transition-colors hover:bg-gold/10"
+          >
+            Abrir localização no Google Maps
+          </a>
         </div>
       </div>
     </section>
@@ -840,7 +854,7 @@ function Footer() {
             <Instagram className="size-5" strokeWidth={1.5} />
           </a>
           <a
-            href="https://www.threads.net/@t.v_engenharia"
+            href={THREADS_URL}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Threads @t.v_engenharia"
