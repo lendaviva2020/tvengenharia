@@ -9,16 +9,12 @@ declare global {
   }
 }
 
-export function initAnalytics() {
-  if (typeof window === "undefined") return;
+function isRealGaId(id: string) {
+  return Boolean(id) && id !== "G-PLACEHOLDER" && /^G-[A-Z0-9]+$/i.test(id);
+}
 
-  if (GA_MEASUREMENT_ID === "G-PLACEHOLDER") {
-    console.warn(
-      "[GA4] Measurement ID de placeholder em uso. Substitua G-PLACEHOLDER pelo ID real em src/lib/analytics.ts",
-    );
-  }
-
-  if (window.gtag) return;
+function injectGtag() {
+  if (typeof window === "undefined" || window.gtag) return;
 
   window.dataLayer = window.dataLayer || [];
   function gtag(...args: unknown[]) {
@@ -33,6 +29,27 @@ export function initAnalytics() {
 
   gtag("js", new Date());
   gtag("config", GA_MEASUREMENT_ID);
+}
+
+/** Carrega o gtag só com ID real, depois do load da página (não bloqueia a 1ª renderização). */
+export function initAnalytics() {
+  if (typeof window === "undefined") return;
+  if (!isRealGaId(GA_MEASUREMENT_ID)) return;
+
+  const schedule = () => {
+    const ric = window.requestIdleCallback?.bind(window);
+    if (ric) {
+      ric(() => injectGtag(), { timeout: 4000 });
+    } else {
+      window.setTimeout(injectGtag, 1);
+    }
+  };
+
+  if (document.readyState === "complete") {
+    schedule();
+  } else {
+    window.addEventListener("load", schedule, { once: true });
+  }
 }
 
 export function trackEvent(eventName: string, params?: Record<string, string | number | boolean>) {

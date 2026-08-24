@@ -41,7 +41,7 @@ const WA_DEFAULT_CONTEXT = "Cafelândia/PR";
 const SITE_URL = "https://tvengenharia.vercel.app";
 const COMPANY_MAP_URL = "https://maps.app.goo.gl/7dDmeSB4Z6ajR3cV6";
 const COMPANY_MAP_EMBED_URL =
-  "https://www.google.com/maps?q=https%3A%2F%2Fmaps.app.goo.gl%2F7dDmeSB4Z6ajR3cV6&output=embed";
+  "https://www.google.com/maps?q=R.+Paulo+Szerega,+706+-+Centro,+Cafel%C3%A2ndia+-+PR,+85415-000&hl=pt-BR&z=17&output=embed";
 const THREADS_URL = "https://www.threads.com/@t.v_engenharia";
 
 function abs(url: string) {
@@ -681,7 +681,7 @@ function Contato() {
             <MessageCircle className="size-5" strokeWidth={1.6} />
             Fale conosco e solicite um orçamento
           </a>
-          <div className="mt-6 grid gap-4 sm:grid-cols-3">
+          <div className="mt-6 grid min-w-0 gap-4 sm:grid-cols-3">
             <a
               href={whatsappLink(WA_TIAGO_BASE, WA_PRE_MESSAGE, WA_DEFAULT_CONTEXT)}
               target="_blank"
@@ -708,12 +708,14 @@ function Contato() {
             </a>
             <a
               href="mailto:angelicabloinski@hotmail.com"
-              className="rounded-2xl border border-gold/40 p-5 transition-colors hover:bg-gold/10"
+              className="min-w-0 rounded-2xl border border-gold/40 p-5 transition-colors hover:bg-gold/10"
             >
               <p className="font-display text-sm uppercase tracking-wide">E-mail</p>
-              <p className="mt-1 flex items-center gap-1.5 text-sm text-gold">
-                <Mail className="size-4" strokeWidth={1.6} />
-                angelicabloinski@hotmail.com
+              <p className="mt-1 flex min-w-0 items-start gap-1.5 text-xs text-gold sm:text-[13px]">
+                <Mail className="mt-0.5 size-3.5 shrink-0" strokeWidth={1.6} />
+                <span className="min-w-0 break-all [overflow-wrap:anywhere]">
+                  angelicabloinski@hotmail.com
+                </span>
               </p>
             </a>
           </div>
@@ -811,7 +813,7 @@ function Contato() {
         </p>
         <div className="overflow-hidden rounded-3xl border border-border shadow-[var(--shadow-soft)]">
           <iframe
-            title="Mapa de Cafelândia, PR"
+            title="Localização — R. Paulo Szerega, 706, Cafelândia/PR"
             src={COMPANY_MAP_EMBED_URL}
             width="100%"
             height="360"

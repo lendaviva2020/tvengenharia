@@ -105,9 +105,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      // display=swap + media=print evita bloquear o 1º paint do H1 (fonte sobe depois)
       {
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Cormorant+Garamond:wght@600;700&family=DM+Sans:wght@400;500;700&display=swap",
+        media: "print",
       },
     ],
   }),
@@ -135,6 +137,13 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
   useEffect(() => {
+    // Ativa o CSS do Google Fonts sem bloquear o 1º paint (link entra como media=print)
+    document
+      .querySelectorAll<HTMLLinkElement>('link[href*="fonts.googleapis.com"][media="print"]')
+      .forEach((link) => {
+        link.media = "all";
+      });
+
     initAnalytics();
   }, []);
 
