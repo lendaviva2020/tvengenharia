@@ -508,6 +508,23 @@ const projetos: Projeto[] = [
   },
 ];
 
+// Variantes redimensionadas geradas no repositório (arquivos .jpg reais),
+// importadas normalmente pelo Vite — funcionam em qualquer domínio/host.
+type Variante = { w480: string; w960: string; w: number; h: number };
+const variantes: Record<string, Variante> = {
+  p1: { w480: projeto1w480, w960: projeto1w960, w: 1737, h: 905 },
+  p2: { w480: projeto2w480, w960: projeto2w960, w: 1738, h: 905 },
+  p3: { w480: projeto3w480, w960: projeto3w960, w: 1536, h: 1024 },
+  p4: { w480: projeto4w480, w960: projeto4w960, w: 1739, h: 904 },
+  p5: { w480: projeto5w480, w960: projeto5w960, w: 1672, h: 941 },
+  p6: { w480: projeto6w480, w960: projeto6w960, w: 1079, h: 719 },
+};
+
+function srcSetDe(p: Projeto) {
+  const v = variantes[p.id]!;
+  return `${v.w480} 480w, ${v.w960} 960w, ${p.img} ${v.w}w`;
+}
+
 const CREDITO = "Projeto: Angélica Bloinski · Execução: Tiago Visnieski";
 const categorias = ["Todos", "Residencial", "Reforma"] as const;
 
