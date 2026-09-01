@@ -230,9 +230,11 @@ function Hero() {
     <section id="top" className="diagonal-gold relative flex min-h-screen items-center">
       <img
         src={projeto1}
+        srcSet={`${projeto1w480} 480w, ${projeto1w960} 960w, ${projeto1} 1737w`}
+        sizes="100vw"
         alt="Residência geminada Jardim Ravena II — projeto e execução TV Engenharia"
-        width={1600}
-        height={1104}
+        width={1737}
+        height={905}
         fetchPriority="high"
         loading="eager"
         className="hero-zoom absolute inset-0 size-full object-cover opacity-55"
