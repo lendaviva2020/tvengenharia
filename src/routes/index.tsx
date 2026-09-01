@@ -913,16 +913,33 @@ function Contato() {
           Atendemos Cafelândia e região
         </p>
         <div className="overflow-hidden rounded-3xl border border-border shadow-[var(--shadow-soft)]">
-          <iframe
-            title="Localização — R. Paulo Szerega, 706, Cafelândia/PR"
-            src={COMPANY_MAP_EMBED_URL}
-            width="100%"
-            height="360"
-            style={{ border: 0 }}
-            allowFullScreen
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          />
+          {mapaAtivo ? (
+            <iframe
+              title="Localização — R. Paulo Szerega, 706, Cafelândia/PR"
+              src={COMPANY_MAP_EMBED_URL}
+              width="100%"
+              height="360"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+          ) : (
+            <button
+              type="button"
+              onClick={() => setMapaAtivo(true)}
+              className="flex h-[360px] w-full flex-col items-center justify-center gap-4 bg-secondary/40 bg-[radial-gradient(circle_at_30%_30%,rgba(201,162,39,0.12),transparent_60%)] transition-colors hover:bg-secondary/60"
+            >
+              <MapPin className="size-8 text-gold" strokeWidth={1.4} />
+              <span className="font-display text-sm uppercase tracking-[0.15em] text-foreground">
+                Carregar mapa
+              </span>
+              <span className="max-w-xs px-6 text-center text-xs text-muted-foreground">
+                R. Paulo Szerega, 706 — Cafelândia/PR. O mapa é carregado sob clique para preservar
+                sua privacidade e acelerar a página.
+              </span>
+            </button>
+          )}
         </div>
         <div className="mt-6 text-center">
           <a
