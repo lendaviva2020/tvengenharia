@@ -725,6 +725,7 @@ function Portfolio() {
 
 function Contato() {
   const [form, setForm] = useState({ nome: "", telefone: "", bairroCidade: "", mensagem: "" });
+  const [mapaAtivo, setMapaAtivo] = useState(false);
   const [errors, setErrors] = useState<{
     nome?: string;
     telefone?: string;
