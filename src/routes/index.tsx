@@ -99,11 +99,16 @@ export const Route = createFileRoute("/")({
           description:
             "Projetos arquitetônicos, construção chave na mão, desmembramento e unificação de lotes.",
           areaServed: "Cafelândia e região, Paraná",
-          telephone: "+5545998176765",
+          telephone: ["+5545999213004", "+5545998176765"],
           email: "angelicabloinski@hotmail.com",
           logo: `${SITE_URL}/web-app-manifest-512x512.png`,
           image: [`${SITE_URL}/web-app-manifest-512x512.png`, abs(projeto3)],
-          address: { "@type": "PostalAddress", addressRegion: "PR", addressCountry: "BR" },
+          address: {
+            "@type": "PostalAddress",
+            addressLocality: "Cafelândia",
+            addressRegion: "PR",
+            addressCountry: "BR",
+          },
           sameAs: [
             "https://instagram.com/t.v_engenharia",
             "https://www.threads.com/@t.v_engenharia",
