@@ -838,9 +838,15 @@ function Contato() {
               value={form.nome}
               onChange={(e) => setForm({ ...form, nome: e.target.value })}
               maxLength={100}
+              aria-invalid={errors.nome ? true : undefined}
+              aria-describedby={errors.nome ? "nome-erro" : undefined}
               className="mt-2 w-full rounded-lg border border-border bg-background px-4 py-3 outline-none focus:border-gold"
             />
-            {errors.nome ? <p className="mt-1 text-xs text-destructive">{errors.nome}</p> : null}
+            {errors.nome ? (
+              <p id="nome-erro" className="mt-1 text-xs text-destructive">
+                {errors.nome}
+              </p>
+            ) : null}
           </div>
           <div>
             <label
@@ -852,13 +858,18 @@ function Contato() {
             <input
               id="telefone"
               required
+              inputMode="tel"
               value={form.telefone}
               onChange={(e) => setForm({ ...form, telefone: e.target.value })}
               maxLength={40}
+              aria-invalid={errors.telefone ? true : undefined}
+              aria-describedby={errors.telefone ? "telefone-erro" : undefined}
               className="mt-2 w-full rounded-lg border border-border bg-background px-4 py-3 outline-none focus:border-gold"
             />
             {errors.telefone ? (
-              <p className="mt-1 text-xs text-destructive">{errors.telefone}</p>
+              <p id="telefone-erro" className="mt-1 text-xs text-destructive">
+                {errors.telefone}
+              </p>
             ) : null}
           </div>
           <div>
@@ -874,10 +885,14 @@ function Contato() {
               value={form.bairroCidade}
               onChange={(e) => setForm({ ...form, bairroCidade: e.target.value })}
               maxLength={120}
+              aria-invalid={errors.bairroCidade ? true : undefined}
+              aria-describedby={errors.bairroCidade ? "bairroCidade-erro" : undefined}
               className="mt-2 w-full rounded-lg border border-border bg-background px-4 py-3 outline-none focus:border-gold"
             />
             {errors.bairroCidade ? (
-              <p className="mt-1 text-xs text-destructive">{errors.bairroCidade}</p>
+              <p id="bairroCidade-erro" className="mt-1 text-xs text-destructive">
+                {errors.bairroCidade}
+              </p>
             ) : null}
           </div>
           <div>
@@ -894,10 +909,14 @@ function Contato() {
               value={form.mensagem}
               onChange={(e) => setForm({ ...form, mensagem: e.target.value })}
               maxLength={1000}
+              aria-invalid={errors.mensagem ? true : undefined}
+              aria-describedby={errors.mensagem ? "mensagem-erro" : undefined}
               className="mt-2 w-full rounded-lg border border-border bg-background px-4 py-3 outline-none focus:border-gold"
             />
             {errors.mensagem ? (
-              <p className="mt-1 text-xs text-destructive">{errors.mensagem}</p>
+              <p id="mensagem-erro" className="mt-1 text-xs text-destructive">
+                {errors.mensagem}
+              </p>
             ) : null}
           </div>
           <button
