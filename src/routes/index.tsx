@@ -783,30 +783,42 @@ function Contato() {
             Fale conosco e solicite um orçamento
           </a>
           <div className="mt-6 grid min-w-0 gap-4 sm:grid-cols-3">
-            <a
-              href={whatsappLink(WA_TIAGO_BASE, WA_PRE_MESSAGE, WA_DEFAULT_CONTEXT)}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() =>
-                trackEvent("whatsapp_tiago_click", { profissional: "Tiago Visnieski" })
-              }
-              className="rounded-2xl border border-gold/40 p-5 transition-colors hover:bg-gold/10"
-            >
+            <div className="rounded-2xl border border-gold/40 p-5">
               <p className="font-display text-sm uppercase tracking-wide">Tiago Visnieski</p>
-              <p className="mt-1 text-sm text-gold">(45) 99921-3004</p>
-            </a>
-            <a
-              href={whatsappLink(WA_ANGELICA_BASE, WA_PRE_MESSAGE, WA_DEFAULT_CONTEXT)}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() =>
-                trackEvent("whatsapp_angelica_click", { profissional: "Angélica Bloinski" })
-              }
-              className="rounded-2xl border border-gold/40 p-5 transition-colors hover:bg-gold/10"
-            >
+              <a href="tel:+5545999213004" className="mt-1 block text-sm text-gold hover:underline">
+                (45) 99921-3004
+              </a>
+              <a
+                href={whatsappLink(WA_TIAGO_BASE, WA_PRE_MESSAGE, WA_DEFAULT_CONTEXT)}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() =>
+                  trackEvent("whatsapp_tiago_click", { profissional: "Tiago Visnieski" })
+                }
+                className="mt-3 inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.14em] text-muted-foreground transition-colors hover:text-gold"
+              >
+                <MessageCircle className="size-3.5" strokeWidth={1.6} />
+                WhatsApp
+              </a>
+            </div>
+            <div className="rounded-2xl border border-gold/40 p-5">
               <p className="font-display text-sm uppercase tracking-wide">Angélica Bloinski</p>
-              <p className="mt-1 text-sm text-gold">(45) 99817-6765</p>
-            </a>
+              <a href="tel:+5545998176765" className="mt-1 block text-sm text-gold hover:underline">
+                (45) 99817-6765
+              </a>
+              <a
+                href={whatsappLink(WA_ANGELICA_BASE, WA_PRE_MESSAGE, WA_DEFAULT_CONTEXT)}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() =>
+                  trackEvent("whatsapp_angelica_click", { profissional: "Angélica Bloinski" })
+                }
+                className="mt-3 inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.14em] text-muted-foreground transition-colors hover:text-gold"
+              >
+                <MessageCircle className="size-3.5" strokeWidth={1.6} />
+                WhatsApp
+              </a>
+            </div>
             <a
               href="mailto:angelicabloinski@hotmail.com"
               className="min-w-0 rounded-2xl border border-gold/40 p-5 transition-colors hover:bg-gold/10"
