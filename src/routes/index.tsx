@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import {
   ClipboardList,
   Cog,
@@ -24,14 +24,26 @@ import {
   AtSign,
   MessageCircle,
   Mail,
+  MapPin,
 } from "lucide-react";
-import heroCasa from "@/assets/hero-casa.jpg";
 import projeto1 from "@/assets/projeto-1.jpg";
+import projeto1w480 from "@/assets/projeto-1-480.jpg";
+import projeto1w960 from "@/assets/projeto-1-960.jpg";
 import projeto2 from "@/assets/projeto-2.jpg";
+import projeto2w480 from "@/assets/projeto-2-480.jpg";
+import projeto2w960 from "@/assets/projeto-2-960.jpg";
 import projeto3 from "@/assets/projeto-3.jpg";
+import projeto3w480 from "@/assets/projeto-3-480.jpg";
+import projeto3w960 from "@/assets/projeto-3-960.jpg";
 import projeto4 from "@/assets/projeto-4.jpg";
+import projeto4w480 from "@/assets/projeto-4-480.jpg";
+import projeto4w960 from "@/assets/projeto-4-960.jpg";
 import projeto5 from "@/assets/projeto-5.jpg";
+import projeto5w480 from "@/assets/projeto-5-480.jpg";
+import projeto5w960 from "@/assets/projeto-5-960.jpg";
 import projeto6 from "@/assets/projeto-6.jpg";
+import projeto6w480 from "@/assets/projeto-6-480.jpg";
+import projeto6w960 from "@/assets/projeto-6-960.jpg";
 import { trackEvent } from "@/lib/analytics";
 
 const WA_ANGELICA_BASE = "5545998176765";
@@ -88,11 +100,16 @@ export const Route = createFileRoute("/")({
           description:
             "Projetos arquitetônicos, construção chave na mão, desmembramento e unificação de lotes.",
           areaServed: "Cafelândia e região, Paraná",
-          telephone: "+5545998176765",
+          telephone: ["+5545999213004", "+5545998176765"],
           email: "angelicabloinski@hotmail.com",
           logo: `${SITE_URL}/web-app-manifest-512x512.png`,
           image: [`${SITE_URL}/web-app-manifest-512x512.png`, abs(projeto3)],
-          address: { "@type": "PostalAddress", addressRegion: "PR", addressCountry: "BR" },
+          address: {
+            "@type": "PostalAddress",
+            addressLocality: "Cafelândia",
+            addressRegion: "PR",
+            addressCountry: "BR",
+          },
           sameAs: [
             "https://instagram.com/t.v_engenharia",
             "https://www.threads.com/@t.v_engenharia",
@@ -214,9 +231,11 @@ function Hero() {
     <section id="top" className="diagonal-gold relative flex min-h-screen items-center">
       <img
         src={projeto1}
+        srcSet={`${projeto1w480} 480w, ${projeto1w960} 960w, ${projeto1} 1737w`}
+        sizes="100vw"
         alt="Residência geminada Jardim Ravena II — projeto e execução TV Engenharia"
-        width={1600}
-        height={1104}
+        width={1737}
+        height={905}
         fetchPriority="high"
         loading="eager"
         className="hero-zoom absolute inset-0 size-full object-cover opacity-55"
@@ -490,6 +509,23 @@ const projetos: Projeto[] = [
   },
 ];
 
+// Variantes redimensionadas geradas no repositório (arquivos .jpg reais),
+// importadas normalmente pelo Vite — funcionam em qualquer domínio/host.
+type Variante = { w480: string; w960: string; w: number; h: number };
+const variantes: Record<string, Variante> = {
+  p1: { w480: projeto1w480, w960: projeto1w960, w: 1737, h: 905 },
+  p2: { w480: projeto2w480, w960: projeto2w960, w: 1738, h: 905 },
+  p3: { w480: projeto3w480, w960: projeto3w960, w: 1536, h: 1024 },
+  p4: { w480: projeto4w480, w960: projeto4w960, w: 1739, h: 904 },
+  p5: { w480: projeto5w480, w960: projeto5w960, w: 1672, h: 941 },
+  p6: { w480: projeto6w480, w960: projeto6w960, w: 1079, h: 719 },
+};
+
+function srcSetDe(p: Projeto) {
+  const v = variantes[p.id]!;
+  return `${v.w480} 480w, ${v.w960} 960w, ${p.img} ${v.w}w`;
+}
+
 const CREDITO = "Projeto: Angélica Bloinski · Execução: Tiago Visnieski";
 const categorias = ["Todos", "Residencial", "Reforma"] as const;
 
@@ -521,11 +557,60 @@ function Portfolio() {
   const [aberto, setAberto] = useState<Projeto | null>(null);
   const lista = projetos.filter((p) => filtro === "Todos" || p.categoria === filtro);
 
+  const dialogRef = useRef<HTMLDivElement | null>(null);
+  const origemRef = useRef<HTMLButtonElement | null>(null);
+
+  const abrir = (p: Projeto, el: HTMLButtonElement) => {
+    origemRef.current = el;
+    setAberto(p);
+  };
+
+  const fechar = () => {
+    setAberto(null);
+    origemRef.current?.focus();
+  };
+
   useEffect(() => {
     if (!aberto) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setAberto(null);
+    const node = dialogRef.current;
+    node?.focus();
+
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        setAberto(null);
+        origemRef.current?.focus();
+        return;
+      }
+      if (e.key !== "Tab" || !node) return;
+      const focusables = node.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])',
+      );
+      if (focusables.length === 0) {
+        e.preventDefault();
+        node.focus();
+        return;
+      }
+      const first = focusables[0]!;
+      const last = focusables[focusables.length - 1]!;
+      const active = document.activeElement;
+      if (e.shiftKey && (active === first || active === node)) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && active === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+
     window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = previous;
+    };
   }, [aberto]);
 
   return (
@@ -554,11 +639,15 @@ function Portfolio() {
           <button
             key={p.id}
             type="button"
-            onClick={() => setAberto(p)}
+            onClick={(e) => abrir(p, e.currentTarget)}
             className="group overflow-hidden rounded-2xl border border-border bg-card text-left shadow-[var(--shadow-soft)] transition-transform hover:-translate-y-1"
           >
             <img
               src={p.img}
+              srcSet={srcSetDe(p)}
+              sizes="(min-width: 1024px) 373px, (min-width: 768px) 33vw, calc(100vw - 40px)"
+              width={variantes[p.id]!.w}
+              height={variantes[p.id]!.h}
               alt={`${p.titulo} — ${p.cidade}`}
               loading="lazy"
               className="aspect-4/3 w-full object-cover transition-transform duration-500 group-hover:scale-105"
@@ -577,17 +666,23 @@ function Portfolio() {
       {aberto && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-background/90 p-4 backdrop-blur"
-          onClick={() => setAberto(null)}
-          role="dialog"
-          aria-modal="true"
-          aria-label={aberto.titulo}
+          onClick={fechar}
         >
           <div
-            className="max-h-[90vh] w-full max-w-3xl overflow-y-auto rounded-3xl border border-border bg-card shadow-[var(--shadow-elegant)]"
+            ref={dialogRef}
+            role="dialog"
+            aria-modal="true"
+            aria-label={aberto.titulo}
+            tabIndex={-1}
+            className="max-h-[90vh] w-full max-w-3xl overflow-y-auto rounded-3xl border border-border bg-card shadow-[var(--shadow-elegant)] outline-none"
             onClick={(e) => e.stopPropagation()}
           >
             <img
               src={aberto.img}
+              srcSet={srcSetDe(aberto)}
+              sizes="(min-width: 768px) 768px, calc(100vw - 32px)"
+              width={variantes[aberto.id]!.w}
+              height={variantes[aberto.id]!.h}
               alt={aberto.titulo}
               className="w-full rounded-t-3xl object-cover"
             />
@@ -603,7 +698,7 @@ function Portfolio() {
                 </div>
                 <button
                   type="button"
-                  onClick={() => setAberto(null)}
+                  onClick={fechar}
                   className="rounded-full border border-border px-4 py-2 text-xs uppercase tracking-[0.14em] text-muted-foreground hover:text-foreground"
                 >
                   Fechar
@@ -630,6 +725,7 @@ function Portfolio() {
 
 function Contato() {
   const [form, setForm] = useState({ nome: "", telefone: "", bairroCidade: "", mensagem: "" });
+  const [mapaAtivo, setMapaAtivo] = useState(false);
   const [errors, setErrors] = useState<{
     nome?: string;
     telefone?: string;
@@ -688,30 +784,42 @@ function Contato() {
             Fale conosco e solicite um orçamento
           </a>
           <div className="mt-6 grid min-w-0 gap-4 sm:grid-cols-3">
-            <a
-              href={whatsappLink(WA_TIAGO_BASE, WA_PRE_MESSAGE, WA_DEFAULT_CONTEXT)}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() =>
-                trackEvent("whatsapp_tiago_click", { profissional: "Tiago Visnieski" })
-              }
-              className="rounded-2xl border border-gold/40 p-5 transition-colors hover:bg-gold/10"
-            >
+            <div className="rounded-2xl border border-gold/40 p-5">
               <p className="font-display text-sm uppercase tracking-wide">Tiago Visnieski</p>
-              <p className="mt-1 text-sm text-gold">(45) 99921-3004</p>
-            </a>
-            <a
-              href={whatsappLink(WA_ANGELICA_BASE, WA_PRE_MESSAGE, WA_DEFAULT_CONTEXT)}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() =>
-                trackEvent("whatsapp_angelica_click", { profissional: "Angélica Bloinski" })
-              }
-              className="rounded-2xl border border-gold/40 p-5 transition-colors hover:bg-gold/10"
-            >
+              <a href="tel:+5545999213004" className="mt-1 block text-sm text-gold hover:underline">
+                (45) 99921-3004
+              </a>
+              <a
+                href={whatsappLink(WA_TIAGO_BASE, WA_PRE_MESSAGE, WA_DEFAULT_CONTEXT)}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() =>
+                  trackEvent("whatsapp_tiago_click", { profissional: "Tiago Visnieski" })
+                }
+                className="mt-3 inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.14em] text-muted-foreground transition-colors hover:text-gold"
+              >
+                <MessageCircle className="size-3.5" strokeWidth={1.6} />
+                WhatsApp
+              </a>
+            </div>
+            <div className="rounded-2xl border border-gold/40 p-5">
               <p className="font-display text-sm uppercase tracking-wide">Angélica Bloinski</p>
-              <p className="mt-1 text-sm text-gold">(45) 99817-6765</p>
-            </a>
+              <a href="tel:+5545998176765" className="mt-1 block text-sm text-gold hover:underline">
+                (45) 99817-6765
+              </a>
+              <a
+                href={whatsappLink(WA_ANGELICA_BASE, WA_PRE_MESSAGE, WA_DEFAULT_CONTEXT)}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() =>
+                  trackEvent("whatsapp_angelica_click", { profissional: "Angélica Bloinski" })
+                }
+                className="mt-3 inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.14em] text-muted-foreground transition-colors hover:text-gold"
+              >
+                <MessageCircle className="size-3.5" strokeWidth={1.6} />
+                WhatsApp
+              </a>
+            </div>
             <a
               href="mailto:angelicabloinski@hotmail.com"
               className="min-w-0 rounded-2xl border border-gold/40 p-5 transition-colors hover:bg-gold/10"
@@ -743,9 +851,15 @@ function Contato() {
               value={form.nome}
               onChange={(e) => setForm({ ...form, nome: e.target.value })}
               maxLength={100}
+              aria-invalid={errors.nome ? true : undefined}
+              aria-describedby={errors.nome ? "nome-erro" : undefined}
               className="mt-2 w-full rounded-lg border border-border bg-background px-4 py-3 outline-none focus:border-gold"
             />
-            {errors.nome ? <p className="mt-1 text-xs text-destructive">{errors.nome}</p> : null}
+            {errors.nome ? (
+              <p id="nome-erro" className="mt-1 text-xs text-destructive">
+                {errors.nome}
+              </p>
+            ) : null}
           </div>
           <div>
             <label
@@ -757,13 +871,18 @@ function Contato() {
             <input
               id="telefone"
               required
+              inputMode="tel"
               value={form.telefone}
               onChange={(e) => setForm({ ...form, telefone: e.target.value })}
               maxLength={40}
+              aria-invalid={errors.telefone ? true : undefined}
+              aria-describedby={errors.telefone ? "telefone-erro" : undefined}
               className="mt-2 w-full rounded-lg border border-border bg-background px-4 py-3 outline-none focus:border-gold"
             />
             {errors.telefone ? (
-              <p className="mt-1 text-xs text-destructive">{errors.telefone}</p>
+              <p id="telefone-erro" className="mt-1 text-xs text-destructive">
+                {errors.telefone}
+              </p>
             ) : null}
           </div>
           <div>
@@ -779,10 +898,14 @@ function Contato() {
               value={form.bairroCidade}
               onChange={(e) => setForm({ ...form, bairroCidade: e.target.value })}
               maxLength={120}
+              aria-invalid={errors.bairroCidade ? true : undefined}
+              aria-describedby={errors.bairroCidade ? "bairroCidade-erro" : undefined}
               className="mt-2 w-full rounded-lg border border-border bg-background px-4 py-3 outline-none focus:border-gold"
             />
             {errors.bairroCidade ? (
-              <p className="mt-1 text-xs text-destructive">{errors.bairroCidade}</p>
+              <p id="bairroCidade-erro" className="mt-1 text-xs text-destructive">
+                {errors.bairroCidade}
+              </p>
             ) : null}
           </div>
           <div>
@@ -799,10 +922,14 @@ function Contato() {
               value={form.mensagem}
               onChange={(e) => setForm({ ...form, mensagem: e.target.value })}
               maxLength={1000}
+              aria-invalid={errors.mensagem ? true : undefined}
+              aria-describedby={errors.mensagem ? "mensagem-erro" : undefined}
               className="mt-2 w-full rounded-lg border border-border bg-background px-4 py-3 outline-none focus:border-gold"
             />
             {errors.mensagem ? (
-              <p className="mt-1 text-xs text-destructive">{errors.mensagem}</p>
+              <p id="mensagem-erro" className="mt-1 text-xs text-destructive">
+                {errors.mensagem}
+              </p>
             ) : null}
           </div>
           <button
@@ -818,16 +945,33 @@ function Contato() {
           Atendemos Cafelândia e região
         </p>
         <div className="overflow-hidden rounded-3xl border border-border shadow-[var(--shadow-soft)]">
-          <iframe
-            title="Localização — R. Paulo Szerega, 706, Cafelândia/PR"
-            src={COMPANY_MAP_EMBED_URL}
-            width="100%"
-            height="360"
-            style={{ border: 0 }}
-            allowFullScreen
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          />
+          {mapaAtivo ? (
+            <iframe
+              title="Localização — R. Paulo Szerega, 706, Cafelândia/PR"
+              src={COMPANY_MAP_EMBED_URL}
+              width="100%"
+              height="360"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+          ) : (
+            <button
+              type="button"
+              onClick={() => setMapaAtivo(true)}
+              className="flex h-[360px] w-full flex-col items-center justify-center gap-4 bg-secondary/40 bg-[radial-gradient(circle_at_30%_30%,rgba(201,162,39,0.12),transparent_60%)] transition-colors hover:bg-secondary/60"
+            >
+              <MapPin className="size-8 text-gold" strokeWidth={1.4} />
+              <span className="font-display text-sm uppercase tracking-[0.15em] text-foreground">
+                Carregar mapa
+              </span>
+              <span className="max-w-xs px-6 text-center text-xs text-muted-foreground">
+                R. Paulo Szerega, 706 — Cafelândia/PR. O mapa é carregado sob clique para preservar
+                sua privacidade e acelerar a página.
+              </span>
+            </button>
+          )}
         </div>
         <div className="mt-6 text-center">
           <a
@@ -901,8 +1045,14 @@ function Footer() {
 function Index() {
   return (
     <div className="min-h-screen bg-background">
+      <a
+        href="#conteudo"
+        className="sr-only rounded-full bg-gold px-5 py-3 font-display text-xs uppercase tracking-[0.15em] text-primary-foreground focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100]"
+      >
+        Pular para o conteúdo
+      </a>
       <Header />
-      <main>
+      <main id="conteudo">
         <Hero />
         <Sobre />
         <ChaveNaMao />
