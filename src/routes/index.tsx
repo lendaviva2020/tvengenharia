@@ -24,6 +24,7 @@ import {
   AtSign,
   MessageCircle,
   Mail,
+  MapPin,
 } from "lucide-react";
 import projeto1 from "@/assets/projeto-1.jpg";
 import projeto1w480 from "@/assets/projeto-1-480.jpg";
