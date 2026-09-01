@@ -1045,8 +1045,14 @@ function Footer() {
 function Index() {
   return (
     <div className="min-h-screen bg-background">
+      <a
+        href="#conteudo"
+        className="sr-only rounded-full bg-gold px-5 py-3 font-display text-xs uppercase tracking-[0.15em] text-primary-foreground focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100]"
+      >
+        Pular para o conteúdo
+      </a>
       <Header />
-      <main>
+      <main id="conteudo">
         <Hero />
         <Sobre />
         <ChaveNaMao />
