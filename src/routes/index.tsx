@@ -556,11 +556,60 @@ function Portfolio() {
   const [aberto, setAberto] = useState<Projeto | null>(null);
   const lista = projetos.filter((p) => filtro === "Todos" || p.categoria === filtro);
 
+  const dialogRef = useRef<HTMLDivElement | null>(null);
+  const origemRef = useRef<HTMLButtonElement | null>(null);
+
+  const abrir = (p: Projeto, el: HTMLButtonElement) => {
+    origemRef.current = el;
+    setAberto(p);
+  };
+
+  const fechar = () => {
+    setAberto(null);
+    origemRef.current?.focus();
+  };
+
   useEffect(() => {
     if (!aberto) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setAberto(null);
+    const node = dialogRef.current;
+    node?.focus();
+
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        setAberto(null);
+        origemRef.current?.focus();
+        return;
+      }
+      if (e.key !== "Tab" || !node) return;
+      const focusables = node.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])',
+      );
+      if (focusables.length === 0) {
+        e.preventDefault();
+        node.focus();
+        return;
+      }
+      const first = focusables[0]!;
+      const last = focusables[focusables.length - 1]!;
+      const active = document.activeElement;
+      if (e.shiftKey && (active === first || active === node)) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && active === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+
     window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = previous;
+    };
   }, [aberto]);
 
   return (
@@ -589,11 +638,15 @@ function Portfolio() {
           <button
             key={p.id}
             type="button"
-            onClick={() => setAberto(p)}
+            onClick={(e) => abrir(p, e.currentTarget)}
             className="group overflow-hidden rounded-2xl border border-border bg-card text-left shadow-[var(--shadow-soft)] transition-transform hover:-translate-y-1"
           >
             <img
               src={p.img}
+              srcSet={srcSetDe(p)}
+              sizes="(min-width: 1024px) 373px, (min-width: 768px) 33vw, calc(100vw - 40px)"
+              width={variantes[p.id]!.w}
+              height={variantes[p.id]!.h}
               alt={`${p.titulo} — ${p.cidade}`}
               loading="lazy"
               className="aspect-4/3 w-full object-cover transition-transform duration-500 group-hover:scale-105"
@@ -612,17 +665,23 @@ function Portfolio() {
       {aberto && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-background/90 p-4 backdrop-blur"
-          onClick={() => setAberto(null)}
-          role="dialog"
-          aria-modal="true"
-          aria-label={aberto.titulo}
+          onClick={fechar}
         >
           <div
-            className="max-h-[90vh] w-full max-w-3xl overflow-y-auto rounded-3xl border border-border bg-card shadow-[var(--shadow-elegant)]"
+            ref={dialogRef}
+            role="dialog"
+            aria-modal="true"
+            aria-label={aberto.titulo}
+            tabIndex={-1}
+            className="max-h-[90vh] w-full max-w-3xl overflow-y-auto rounded-3xl border border-border bg-card shadow-[var(--shadow-elegant)] outline-none"
             onClick={(e) => e.stopPropagation()}
           >
             <img
               src={aberto.img}
+              srcSet={srcSetDe(aberto)}
+              sizes="(min-width: 768px) 768px, calc(100vw - 32px)"
+              width={variantes[aberto.id]!.w}
+              height={variantes[aberto.id]!.h}
               alt={aberto.titulo}
               className="w-full rounded-t-3xl object-cover"
             />
@@ -638,7 +697,7 @@ function Portfolio() {
                 </div>
                 <button
                   type="button"
-                  onClick={() => setAberto(null)}
+                  onClick={fechar}
                   className="rounded-full border border-border px-4 py-2 text-xs uppercase tracking-[0.14em] text-muted-foreground hover:text-foreground"
                 >
                   Fechar
@@ -662,6 +721,7 @@ function Portfolio() {
     </div>
   );
 }
+
 
 function Contato() {
   const [form, setForm] = useState({ nome: "", telefone: "", bairroCidade: "", mensagem: "" });
