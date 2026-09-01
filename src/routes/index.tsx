@@ -25,13 +25,24 @@ import {
   MessageCircle,
   Mail,
 } from "lucide-react";
-import heroCasa from "@/assets/hero-casa.jpg";
 import projeto1 from "@/assets/projeto-1.jpg";
+import projeto1w480 from "@/assets/projeto-1-480.jpg";
+import projeto1w960 from "@/assets/projeto-1-960.jpg";
 import projeto2 from "@/assets/projeto-2.jpg";
+import projeto2w480 from "@/assets/projeto-2-480.jpg";
+import projeto2w960 from "@/assets/projeto-2-960.jpg";
 import projeto3 from "@/assets/projeto-3.jpg";
+import projeto3w480 from "@/assets/projeto-3-480.jpg";
+import projeto3w960 from "@/assets/projeto-3-960.jpg";
 import projeto4 from "@/assets/projeto-4.jpg";
+import projeto4w480 from "@/assets/projeto-4-480.jpg";
+import projeto4w960 from "@/assets/projeto-4-960.jpg";
 import projeto5 from "@/assets/projeto-5.jpg";
+import projeto5w480 from "@/assets/projeto-5-480.jpg";
+import projeto5w960 from "@/assets/projeto-5-960.jpg";
 import projeto6 from "@/assets/projeto-6.jpg";
+import projeto6w480 from "@/assets/projeto-6-480.jpg";
+import projeto6w960 from "@/assets/projeto-6-960.jpg";
 import { trackEvent } from "@/lib/analytics";
 
 const WA_ANGELICA_BASE = "5545998176765";
