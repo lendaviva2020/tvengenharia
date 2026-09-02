@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { Logo } from "@/components/Logo";
 
 const SITE_URL = "https://tvengenharia.vercel.app";
 
@@ -35,9 +36,8 @@ function PrivacidadeHeader() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-border bg-background/85 backdrop-blur-md">
       <div className="mx-auto flex h-20 max-w-6xl items-center justify-between px-5">
-        <Link to="/" className="leading-none">
-          <span className="font-serif text-2xl font-bold text-gold">TV</span>
-          <span className="ml-2 font-display text-sm uppercase tracking-[0.3em]">Engenharia</span>
+        <Link to="/" className="leading-none" aria-label="TV Engenharia — voltar ao site">
+          <Logo />
         </Link>
         <Link
           to="/"

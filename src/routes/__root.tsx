@@ -107,6 +107,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "theme-color", content: "#0E1116" },
       { name: "msapplication-TileColor", content: "#0E1116" },
       { property: "og:title", content: "TV Engenharia — Projetos e Soluções em Cafelândia/PR" },
+      { property: "og:site_name", content: "TV Engenharia" },
       {
         property: "og:description",
         content: "Do projeto à entrega das chaves. Engenharia em Cafelândia e região, PR.",

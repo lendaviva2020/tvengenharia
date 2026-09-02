@@ -45,6 +45,7 @@ import projeto6 from "@/assets/projeto-6.jpg";
 import projeto6w480 from "@/assets/projeto-6-480.jpg";
 import projeto6w960 from "@/assets/projeto-6-960.jpg";
 import { trackEvent } from "@/lib/analytics";
+import { Logo } from "@/components/Logo";
 
 const WA_ANGELICA_BASE = "5545998176765";
 const WA_TIAGO_BASE = "5545999213004";
@@ -195,9 +196,8 @@ function Header() {
       }`}
     >
       <div className="mx-auto flex h-20 max-w-6xl items-center justify-between px-5">
-        <a href="#top" className="leading-none">
-          <span className="font-serif text-2xl font-bold text-gold">TV</span>
-          <span className="ml-2 font-display text-sm uppercase tracking-[0.3em]">Engenharia</span>
+        <a href="#top" className="leading-none" aria-label="TV Engenharia — voltar ao topo">
+          <Logo />
         </a>
         <nav className="hidden items-center gap-8 font-display text-xs uppercase tracking-[0.2em] text-muted-foreground md:flex">
           <a href="#sobre" className="transition-colors hover:text-gold">
@@ -856,7 +856,7 @@ function Contato() {
               className="mt-2 w-full rounded-lg border border-border bg-background px-4 py-3 outline-none focus:border-gold"
             />
             {errors.nome ? (
-              <p id="nome-erro" className="mt-1 text-xs text-destructive">
+              <p id="nome-erro" role="alert" className="mt-1 text-xs text-destructive">
                 {errors.nome}
               </p>
             ) : null}
@@ -880,7 +880,7 @@ function Contato() {
               className="mt-2 w-full rounded-lg border border-border bg-background px-4 py-3 outline-none focus:border-gold"
             />
             {errors.telefone ? (
-              <p id="telefone-erro" className="mt-1 text-xs text-destructive">
+              <p id="telefone-erro" role="alert" className="mt-1 text-xs text-destructive">
                 {errors.telefone}
               </p>
             ) : null}
@@ -903,7 +903,7 @@ function Contato() {
               className="mt-2 w-full rounded-lg border border-border bg-background px-4 py-3 outline-none focus:border-gold"
             />
             {errors.bairroCidade ? (
-              <p id="bairroCidade-erro" className="mt-1 text-xs text-destructive">
+              <p id="bairroCidade-erro" role="alert" className="mt-1 text-xs text-destructive">
                 {errors.bairroCidade}
               </p>
             ) : null}
@@ -927,7 +927,7 @@ function Contato() {
               className="mt-2 w-full rounded-lg border border-border bg-background px-4 py-3 outline-none focus:border-gold"
             />
             {errors.mensagem ? (
-              <p id="mensagem-erro" className="mt-1 text-xs text-destructive">
+              <p id="mensagem-erro" role="alert" className="mt-1 text-xs text-destructive">
                 {errors.mensagem}
               </p>
             ) : null}
@@ -993,8 +993,7 @@ function Footer() {
     <footer className="border-t border-border py-14">
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 px-5 text-center">
         <p className="leading-none">
-          <span className="font-serif text-2xl font-bold text-gold">TV</span>
-          <span className="ml-2 font-display text-sm uppercase tracking-[0.3em]">Engenharia</span>
+          <Logo />
         </p>
         <div className="flex items-center gap-6 text-gold">
           <a
