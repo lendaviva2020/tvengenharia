@@ -1,6 +1,6 @@
-// Substitua o valor abaixo pelo seu Measurement ID real do Google Analytics 4
-// quando for publicar o site. Exemplo: "G-ABC123XYZ4"
-const GA_MEASUREMENT_ID = "G-PLACEHOLDER";
+// Measurement ID do GA4 sincronizado pelo conector do Google Analytics.
+const GA_MEASUREMENT_ID: string =
+  import.meta.env.VITE_LOVABLE_CONNECTOR_GOOGLE_ANALYTICS_API_KEY ?? "";
 
 declare global {
   interface Window {
@@ -10,7 +10,7 @@ declare global {
 }
 
 function isRealGaId(id: string) {
-  return Boolean(id) && id !== "G-PLACEHOLDER" && /^G-[A-Z0-9]+$/i.test(id);
+  return /^G-[A-Z0-9]+$/i.test(id);
 }
 
 function injectGtag() {
