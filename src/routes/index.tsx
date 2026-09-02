@@ -993,7 +993,7 @@ function Footer() {
     <footer className="border-t border-border py-14">
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 px-5 text-center">
         <p className="leading-none">
-          <Logo />
+          <Logo width={110} tagline={false} />
         </p>
         <div className="flex items-center gap-6 text-gold">
           <a

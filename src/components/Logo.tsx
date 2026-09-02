@@ -1,43 +1,55 @@
-export function LogoSkyline({ className }: { className?: string }) {
+export function Logo({ tagline = true, width = 140 }: { tagline?: boolean; width?: number }) {
   return (
     <svg
-      viewBox="0 0 48 48"
-      fill="none"
-      aria-hidden="true"
-      className={className}
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
+      viewBox="0 0 210 66"
+      width={width}
+      role="img"
+      aria-label="TV Engenharia — Projetos e Soluções"
     >
-      <path d="M6 42h36" />
-      <path d="M10 42V22l8-6v26" />
-      <path d="M22 42V10l10 6v26" />
-      <path d="M36 42V18h6v24" />
-      <path d="M26 18h2M26 24h2M26 30h2" />
-      <path d="M13 26h2M13 32h2" />
-      <path d="M27 6l-5 4" opacity="0.6" />
+      <g
+        fill="none"
+        stroke="#C9A227"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <rect x="4" y="32" width="9" height="26" rx="1" />
+        <rect x="15" y="20" width="9" height="38" rx="1" />
+        <rect x="26" y="38" width="9" height="20" rx="1" />
+      </g>
+      <text
+        x="44"
+        y="34"
+        fontFamily="'Cormorant Garamond', Georgia, serif"
+        fontWeight="700"
+        fontSize="30"
+        fill="#C9A227"
+      >
+        TV
+      </text>
+      <text
+        x="44"
+        y="48"
+        fontFamily="'Oswald', sans-serif"
+        fontWeight="500"
+        fontSize="11"
+        letterSpacing="2.5"
+        fill="#C9A227"
+      >
+        ENGENHARIA
+      </text>
+      {tagline ? (
+        <text
+          x="44"
+          y="59"
+          fontFamily="'DM Sans', sans-serif"
+          fontSize="7"
+          letterSpacing="1.4"
+          fill="#A9A49C"
+        >
+          PROJETOS E SOLUÇÕES
+        </text>
+      ) : null}
     </svg>
-  );
-}
-
-export function Logo({ tagline = true }: { tagline?: boolean }) {
-  return (
-    <span className="flex items-center gap-3 leading-none">
-      <LogoSkyline className="size-10 shrink-0 text-gold" />
-      <span className="flex flex-col gap-1">
-        <span className="flex items-baseline gap-2">
-          <span className="font-serif text-2xl font-bold text-gold">TV</span>
-          <span className="font-display text-sm uppercase tracking-[0.3em] text-foreground">
-            Engenharia
-          </span>
-        </span>
-        {tagline ? (
-          <span className="font-display text-[10px] uppercase tracking-[0.35em] text-muted-foreground">
-            Projetos e Soluções
-          </span>
-        ) : null}
-      </span>
-    </span>
   );
 }
