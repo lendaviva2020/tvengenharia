@@ -639,7 +639,10 @@ function Portfolio() {
           <button
             key={p.id}
             type="button"
-            onClick={(e) => abrir(p, e.currentTarget)}
+            onClick={(e) => {
+              abrir(p, e.currentTarget);
+              trackEvent("portfolio_project_click", { projeto: p.titulo, cidade: p.cidade });
+            }}
             className="group overflow-hidden rounded-2xl border border-border bg-card text-left shadow-[var(--shadow-soft)] transition-transform hover:-translate-y-1"
           >
             <img
@@ -959,7 +962,10 @@ function Contato() {
           ) : (
             <button
               type="button"
-              onClick={() => setMapaAtivo(true)}
+              onClick={() => {
+                setMapaAtivo(true);
+                trackEvent("map_load_click");
+              }}
               className="flex h-[360px] w-full flex-col items-center justify-center gap-4 bg-secondary/40 bg-[radial-gradient(circle_at_30%_30%,rgba(201,162,39,0.12),transparent_60%)] transition-colors hover:bg-secondary/60"
             >
               <MapPin className="size-8 text-gold" strokeWidth={1.4} />
