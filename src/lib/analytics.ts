@@ -1,6 +1,6 @@
 // Measurement ID do GA4 sincronizado pelo conector do Google Analytics.
 const GA_MEASUREMENT_ID: string =
-  import.meta.env.VITE_LOVABLE_CONNECTOR_GOOGLE_ANALYTICS_API_KEY ?? "";
+  import.meta.env["VITE_LOVABLE_CONNECTOR_GOOGLE_ANALYTICS_API_KEY"] ?? "";
 
 declare global {
   interface Window {
