@@ -776,10 +776,10 @@ function Contato() {
 
   return (
 const etapasObra = [
-  { img: obra1, etapa: "Fundação", descricao: "Formas e armaduras do baldrame" },
-  { img: obra2, etapa: "Fundação", descricao: "Baldrame concretado e impermeabilizado" },
-  { img: obra3, etapa: "Alvenaria", descricao: "Levantamento das paredes e pilares" },
-  { img: obra4, etapa: "Estrutura", descricao: "Cimbramento da laje e alvenaria em nível" },
+  { img: obra1, w: 1204, h: 1600, etapa: "Fundação", descricao: "Formas e armaduras do baldrame" },
+  { img: obra2, w: 1600, h: 1200, etapa: "Fundação", descricao: "Baldrame concretado e impermeabilizado" },
+  { img: obra3, w: 1440, h: 1920, etapa: "Alvenaria", descricao: "Levantamento das paredes e pilares" },
+  { img: obra4, w: 1440, h: 1920, etapa: "Estrutura", descricao: "Cimbramento da laje e alvenaria em nível" },
 ] as const;
 
 function Bastidores() {
@@ -846,8 +846,8 @@ function Bastidores() {
             <img
               src={foto.img}
               alt={`Obra da Residência Ravena — ${foto.etapa}: ${foto.descricao}`}
-              width={foto.img === obra1 || foto.img === obra2 ? 1206 : 1440}
-              height={foto.img === obra1 || foto.img === obra2 ? 1600 : 1920}
+              width={foto.w}
+              height={foto.h}
               loading={i === 0 ? "eager" : "lazy"}
               className="aspect-[3/4] w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
             />
