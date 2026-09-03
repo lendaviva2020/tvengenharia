@@ -25,6 +25,8 @@ import {
   MessageCircle,
   Mail,
   MapPin,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 import projeto1 from "@/assets/projeto-1.jpg";
 import projeto1w480 from "@/assets/projeto-1-480.jpg";
@@ -44,6 +46,10 @@ import projeto5w960 from "@/assets/projeto-5-960.jpg";
 import projeto6 from "@/assets/projeto-6.jpg";
 import projeto6w480 from "@/assets/projeto-6-480.jpg";
 import projeto6w960 from "@/assets/projeto-6-960.jpg";
+import obra1 from "@/assets/obra-1.jpg";
+import obra2 from "@/assets/obra-2.jpg";
+import obra3 from "@/assets/obra-3.jpg";
+import obra4 from "@/assets/obra-4.jpg";
 import { trackEvent } from "@/lib/analytics";
 import { Logo } from "@/components/Logo";
 
